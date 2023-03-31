@@ -1,0 +1,51 @@
+<div id="mainBottom">
+    <div id="checkingList">
+            <h2>Checking</h2>
+                <% if (cStatementList !== null) { let count = 0 %>
+                <% cStatementList.forEach(item => { %>
+                    <div class="row" id="cRow<%= count %>">
+                        <div class="delete">
+                            <form action="/auth/deleteStatement/checking/<%= item.month %>?_method=DELETE" method="POST">
+                                <button type="submit">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                        <div class="month">
+                            <p id="cMonth<%= count %>"><%= item.month %></p>
+                        </div>
+                        <div class="viewBtn">
+                            <button>
+                                <a href="/auth/monthlyStatement/checking/<%= item.month %>" target="_blank">View</a>
+                            </button>
+                        </div>
+                    </div>
+                <% count++ }) %>
+                <% } %>
+            </table> 
+    </div>
+    <div id="savingsList">
+            <h2>Savings</h2>
+                <% if (sStatementList !== null) {let count = 0 %>
+                <% sStatementList.forEach(item => { %>
+                        <div class="row" id="sRow<%= count %>">
+                                <div class="delete">
+                                    <form action="/auth/deleteStatement/savings/<%= item.month %>?_method=DELETE" method="POST">
+                                        <button type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="month">
+                                    <p id="sMonth<%= count %>"><%= item.month %></p>
+                                </div>
+                                <div class="viewBtn">
+                                    <button>
+                                        <a href="/auth/monthlyStatement/savings/<%= item.month %>" target="_blank">View</a>
+                                    </button>
+                                </div>
+                        </div>
+                <% count++ }) %>
+                <% } %>
+    </div>
+</div>

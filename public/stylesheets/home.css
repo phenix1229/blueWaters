@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: rgb(67, 80, 93);
+    text-decoration: none;
+}
+
+#app {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr;
+}
+
+#header {
+    grid-row: 1/2;
+    display: grid;
+    grid-column: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    background-color: dodgerblue;
+}
+
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: left;
+    padding: 15px 0 10px 10px;
+}
+
+#title {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+#menu {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    text-align: right;
+    padding: 15px 10px 10px 0;
+}
+
+#main {
+    grid-row: 2/3;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#options {
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.option {
+    padding: 20px;
+    border: 1px solid grey;
+}
+
+#login {
+    grid-row: 1/2;
+    text-align: center;
+}
+
+#register {
+    grid-row: 2/3;
+    text-align: center;
+}
+
+.content {
+    display: none;
+    overflow: hidden;
+}

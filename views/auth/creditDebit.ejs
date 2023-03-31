@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/debtCred.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/balances.css" type="text/css">
+    <title>Deposit and Withdraw</title>
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <%- include('../partials/backLink')  %>
+            <div id="title">
+                <h1>Deposit/Withdraw</h1>
+                Logged in as <%= user %>
+            </div>
+            <%- include('../partials/menuOptions')  %>
+        </div>
+            <%- include('../partials/balanceBanners')  %> 
+        <div id="main">
+            <div id="errorField">
+                <% if (error !== null){ %>
+                    <p style="color:red; font-size: 20px;"><%= error %> </p>
+                <% } %>
+            </div>
+            <div id="options">
+                <form action="/auth/creditDebit" method="POST">
+                    <div id="op1" class="option">
+                        <input type="text" name="dollarAmount" id="dollarAmount" placeholder="Enter dollar amount">
+                        <br>
+                        <input type="text" name="description" id="description" placeholder="Description">
+                    </div>
+                    <div id="op2" class="option">
+                        <label for="debtOrCred">Deposit or Withdrawal:</label>
+                        <br>
+                        <select id="debtOrCred" name="debtOrCred">
+                            <option value="deposit">Deposit</option>
+                            <option value="withdrawal">Withdrawal</option>
+                        </select>
+                    </div>
+                    <div id="op3" class="option">
+                        <label for="acctChoice">Choose account:</label>
+                        <br>
+                        <select id="acctChoice" name="acctChoice">
+                            <option value="checking">Checking</option>
+                            <option value="savings">Savings</option>
+                        </select>
+                    </div>
+                    <div id="op4" class="option">
+                        <button type="submit" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

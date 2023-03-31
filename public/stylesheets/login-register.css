@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: rgb(67, 80, 93);
+    text-decoration: none;
+}
+
+h2 {
+    font-size: xx-large;
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: .5fr .5fr 9fr;
+}
+
+#header {
+    grid-row: 1/2;
+    display: grid;
+    grid-column: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    background-color: dodgerblue;
+    color: rgb(67, 80, 93);
+}
+
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: left;
+    padding: 15px 0 10px 10px;
+}
+
+#title {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+#main {
+    grid-row: 3/4;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#errorField {
+    grid-row: 1/2;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    text-align: center;
+    justify-self: center;
+}
+
+#form {
+    grid-row: 2/4;
+    display: inline-flex;
+    width: 300px;
+    font-size: 25px;
+    justify-self: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+input {
+    font-size: 25px;
+}

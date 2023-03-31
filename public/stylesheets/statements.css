@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: rgb(67, 80, 93);
+    text-decoration: none;
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: .5fr .5fr 9fr;
+}
+
+#header {
+    grid-row: 1/2;
+    display: grid;
+    grid-column: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    background-color: dodgerblue;
+    color: rgb(67, 80, 93);
+}
+
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: left;
+    padding: 15px 0 10px 10px;
+}
+
+#title {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+#main {
+    grid-row: 3/4;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+#mainTop {
+    margin-bottom: 50px;
+    grid-row: 1/2;
+    height: 240px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#options {
+    margin: 20px 20px 0 20px;
+    justify-self: center;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.option {
+    padding: 20px;
+    border: 1px solid grey;
+    font-size: 20px;
+}
+
+#op1 {
+    grid-row: 1/2;
+    text-align: center;
+}
+
+#op2 {
+    grid-row: 2/3;
+    text-align: center;
+}
+
+#op3 {
+    grid-row: 3/4;
+    text-align: center;
+}
+
+input, select, button {
+    font-size: 16px;
+}
+
+#mainBottom {
+    grid-row: 2/3;
+    align-self: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#checkingList {
+    grid-column: 1/2;
+    display: block;
+    text-align: center;
+    justify-items: center;
+}
+
+#savingsList {
+    grid-column: 2/3;
+    display: block;
+    text-align: center;
+    justify-items: center;
+}
+
+.row {
+    align-self: center;
+    justify-self: center;
+    width: 300px;
+    height: 35px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    margin: 1px;
+    border: 1px solid black;
+}
+
+.delete {
+    width: 60px;
+    height: 25px;
+}
+
+.month {
+    width: 100px;
+    height: 25px;
+}
+
+.viewBtn {
+    width: 60px;
+    height: 25px;
+}
+
+@media (max-width: 750px) {
+    .viewBtn {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    #main {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    #mainBottom {
+        grid-row: 2/3;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #checkingList {
+        display: grid;
+        justify-self: center;
+        text-align: center;
+        justify-items: center;
+        margin-bottom: 20px;
+    }
+
+    #savingsList {
+        display: grid;
+        justify-self: center;
+        text-align: center;
+        justify-items: center;
+        margin-bottom: 30px;
+    }
+}

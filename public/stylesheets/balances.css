@@ -1,0 +1,51 @@
+#balances {
+    grid-row: 2/3;
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: white;
+    font-size: 20px;
+}
+
+#checkingBal {
+    grid-row: 1/2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#savingsBal {
+    grid-row: 2/3;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#cBalance {
+    grid-column: 1/2;
+    display: grid;
+    white-space: nowrap;
+    padding: 10px 0 10px 10px;
+}
+
+#sBalance {
+    grid-column: 1/2;
+    display: grid;
+    white-space: nowrap;
+    padding: 10px 0 10px 10px;
+}
+
+#cAmount {
+    grid-column: 2/3;
+    display: grid;
+    text-align: right;
+    padding: 10px;
+}
+
+#sAmount {
+    grid-column: 2/3;
+    display: grid;
+    text-align: right;
+    padding: 10px;
+}

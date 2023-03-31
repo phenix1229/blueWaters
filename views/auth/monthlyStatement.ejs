@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Statement</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/pdfmake.min.js" integrity="sha256-wHsYlzQ9EnjIdWOKOlQcOIw4imM+CDwRJ6NhkvJ96iY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/vfs_fonts.js" integrity="sha256-UsYCHdwExTu9cZB+QgcOkNzUCTweXr5cNfRlAAtIlPY=" crossorigin="anonymous"></script>
+<body>
+    <div id="contents">
+        <div id="heading">
+            <p id="title">My Bank</p>
+            <% let accountType = ''; %> 
+            <% let fullMonth = ''; %> 
+            <% if (cAccount !== null) { %>
+                <% accountType = 'Checking' %> 
+            <% } else if (sAccount !== null) { %>
+                <% accountType = 'Savings' %> 
+            <% } %>
+            <% if (month === 'Jan') { %>
+                <% fullMonth = 'January' %> 
+            <% } else if (month === 'Feb') {%>
+                <% fullMonth = 'February' %>
+            <% } else if (month === 'Mar') { %>
+                <% fullMonth = 'March' %>   
+            <% } else if (month === 'Apr') { %>
+                <% fullMonth = 'April' %>   
+            <% } else if (month === 'May') { %>
+                <% fullMonth = 'May' %>   
+            <% } else if (month === 'Jun') { %>
+                <% fullMonth = 'June' %>   
+            <% } else if (month === 'Jul') { %>
+                <% fullMonth = 'July' %>   
+            <% } else if (month === 'Aug') { %>
+                <% fullMonth = 'August' %>   
+            <% } else if (month === 'Sep') { %>
+                <% fullMonth = 'September' %>   
+            <% } else if (month === 'Oct') { %>
+                <% fullMonth = 'October' %>   
+            <% } else if (month === 'Nov') { %>
+                <% fullMonth = 'November' %>   
+            <% } else if (month === 'Dec') { %>
+                <% fullMonth = 'December' %>
+            <% } %>
+            <p id="subTitle"><%= accountType %> Statement for <%= fullMonth %> </p>
+        </div>
+        <div id="info">
+            <br>
+            <br>
+            <%= `${user.profile.name}` %> 
+            <br>
+            <%= `${user.address}` %> 
+            <br>
+            <% if (cAccount !== null) { %>
+                <%= `Account Number: ${cAccount.accountNumber}` %>
+            <% } else if (sAccount !== null){%>
+                <%= `Account Number: ${sAccount.accountNumber}` %>
+            <% } %>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div id="list">
+            <% if (transactions.length > 0) { %>
+                <% transactions.forEach(item => { %>
+                    <div>
+                        <%= `${item.date}` %>
+                        <br>
+                        <%= `${item.transType}` %>
+                        <br>
+                        <%= `$${item.amount}` %>
+                        <br>
+                        <%= `${item.description}` %>
+                    </div>
+                    <br>
+                <% }) %> 
+            <% } else { %>
+                <p>No transactions this month.</p>
+            <% } %> 
+        </div>
+    </div>
+    <script>
+        const title = document.querySelector('#title').innerText;
+        const subTitle = document.querySelector('#subTitle').innerText;
+        const userInfo = document.querySelector('#info').innerText;
+        const transList = document.querySelector('#list').innerText;
+        const docDefinition = { 
+            content:[
+                {text:`${title}`, fontSize:20, alignment:'center', bold:true},
+                {text:`${subTitle}`, fontSize:16, alignment:'center', bold:true},
+                {text:`${userInfo}`, fontSize:13},
+                {text:`${transList}`, fontSize:10}
+            ]
+        };
+        pdfMake.createPdf(docDefinition).open({}, window);
+    </script>
+</body>
+</html>

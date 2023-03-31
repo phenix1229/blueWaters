@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: rgb(67, 80, 93);
+    text-decoration: none;
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: .5fr .4.75fr 4.75fr;
+}
+
+#header {
+    grid-row: 1/2;
+    display: grid;
+    grid-column: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    background-color: dodgerblue;
+    color: rgb(67, 80, 93);
+}
+
+#nav {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: left;
+    padding: 15px 0 10px 10px;
+}
+
+#title {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+#main {
+    grid-row: 2/4;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#options1 {
+    grid-row: 1/2;
+    margin: 20px 20px 10px 20px;
+    align-self: flex-start;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#options2 {
+    grid-row: 2/3;
+    margin: 10px 20px 10px 20px;
+    align-self: flex-start;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.option {
+    padding: 20px;
+    border: 1px solid grey;
+    font-size: 20px;
+}
+
+#op1 {
+    grid-row: 1/2;
+}
+
+#op2 {
+    grid-row: 2/3;
+    text-align: center;
+}
+
+#op3 {
+    grid-row: 3/4;
+    text-align: center;
+}
+
+#op4 {
+    grid-row: 4/5;
+    text-align: center;
+}
+
+input, select, button {
+    font-size: 16px;
+}
