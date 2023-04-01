@@ -11,13 +11,13 @@ router.get('/register', (req, res) => {
 });
 
 //register new user
-router.post('/register', userValidation, userController.register);
+router.post('/saveMember', userController.saveMember);
 
 //create new member
-router.post('/newMember', userValidation, userController.newMember);
+router.post('/newMember', userController.newMember);
 
 //find member
-router.post('/findMember', userValidation, userController.findMember);
+router.post('/findMember', userController.findMember);
 
 
 //render login page

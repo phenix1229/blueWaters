@@ -38,63 +38,59 @@
                     <h2>Enter or Update</h2>
                     <br>
                     <div>
-                        <% if(member !== undefined){ %>
-                            <input type="text" name="memberID" id="memberID" placeholder=" <%= member.id %>" disabled>
-                            <% } else { %>
-                            <input type="text" name="memberID" id="memberID" placeholder=" ID auto assigned" disabled>
-                            <% } %>
+                        <input type="text" name="memberID" id="memberID" placeholder=" <%= member.id %>" disabled>
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="typeID" id="typeID"placeholder=" Type ID">
+                        <input type="text" name="typeID" id="typeID"placeholder=" <%= member.typeID %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="lastName" id="lastName"placeholder=" Last Name">
+                        <input type="text" name="lastName" id="lastName"placeholder=" <%= member.lastName %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="firstName" id="firstName"placeholder=" First Name">
+                        <input type="text" name="firstName" id="firstName"placeholder=" <%= member.firstName %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="address" id="address"placeholder=" Address">
+                        <input type="text" name="address" id="address"placeholder=" <%= member.address %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="city" id="city"placeholder=" City">
+                        <input type="text" name="city" id="city"placeholder=" <%= member.city %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="state" id="state"placeholder=" State">
+                        <input type="text" name="state" id="state"placeholder=" <%= member.state %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="zipCode" id="zipCode"placeholder=" Zip Code">
+                        <input type="text" name="zipCode" id="zipCode"placeholder=" <%= member.zipCode %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="phoneNumber" id="phoneNumber"placeholder=" Phone Number">
+                        <input type="text" name="phoneNumber" id="phoneNumber"placeholder=" <%= member.phoneNumber %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="cellNumber" id="cellNumber"placeholder=" Cell Number">
+                        <input type="text" name="cellNumber" id="cellNumber"placeholder=" <%= member.cellNumber %>">
                     </div>
                     <br>
                     <div>
-                        <input type="email" name="email" id="email"placeholder=" Email">
+                        <input type="email" name="email" id="email"placeholder=" <%= member.email %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="dateJoined" id="dateJoined"placeholder=" Date Joined">
+                        <input type="text" name="dateJoined" id="dateJoined"placeholder=" <%= member.dateJoined %>" disabled>
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="memType" id="memType"placeholder=" Membership Type">
+                        <input type="text" name="membershipType" id="membershipType"placeholder=" <%= member.membershipType %>">
                     </div>
                     <br>
                     <div>
-                        <input type="text" name="memStatus" id="memStatus" placeholder=" Membership Status">
+                        <input type="text" name="membershipStatus" id="membershipStatus" placeholder=" <%= member.membershipStatus %>">
                     </div>
                     <br>
                     <hr>

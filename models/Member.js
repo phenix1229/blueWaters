@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const MemberSchema = mongoose.Schema({
     typeID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'memberFees'
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'memberFees'
+        type: Number,
+        required: true
     },
     lastName: {
         type: String,
@@ -39,13 +41,17 @@ const MemberSchema = mongoose.Schema({
         required: true,
     },
     dateJoined: {
-        type: Date
+        type: Date,
+        default: Date.now,
+        required: true
     },
     membershipType: {
-        type: String
+        type: String,
+        required: true
     },
     membershipStatus: {
-        type: String
+        type: String,
+        required: true
     }
 })
 

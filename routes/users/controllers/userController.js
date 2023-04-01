@@ -11,17 +11,32 @@ const accountUtils = require('../../accounts/utils/accountUtils')
 module.exports = {
     //create new member
     newMember: (req, res) => {
-        const member = req.body.blankMember;
-        console.log(`this is the member ${member}`);
+        const member = {
+            typeID: null,
+            lastName:"",
+            firstName:"",
+            address:"",
+            city:"",
+            state:"",
+            zipCode:"",
+            phoneNumber:"",
+            cellNumber:"",
+            email:"",
+            membershipType:"",
+            membershipStatus:""
+        }
         return res.render('users/memberInfo', {member, error:null})
     },
 
     //find member
     findMember: (req, res, next) => {
-        const memberID = req.body;
-        Member.findById(memberID).then(member => {
+        const {memberEmail} = req.body;
+        console.log(`this is the member email ${memberEmail}`)
+        Member.findOne({email:memberEmail}).then(member => {
             if(member){
-                res.render('users/memberInfo', {member})
+                return res.render('users/memberInfo', {member, error:null})
+            } else {
+                return res.render('users/members', {error:"No user with this email found"})
             }
         }).catch(err => {
             next (err);
@@ -75,6 +90,37 @@ module.exports = {
                         }
                     });
                 })
+                .catch(err => {
+                    return next(err);
+                });
+            }
+        })
+        .catch(err => reject(err));
+    },
+
+    //register new member
+    saveMember: (req, res, next) => {
+        const { typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus } = req.body;
+        Member.findOne({ email }).then(member => {
+            if (member) {
+                return res.render('users/memberInfo', {member:req.body, error:'Member using this email exists'});
+            } else {
+                const newMember = new Member();
+                newMember.typeID = typeID;
+                newMember.lastName = lastName;
+                newMember.firstName = firstName;
+                newMember.address = address;
+                newMember.city = city;
+                newMember.state = state;
+                newMember.zipCode = zipCode;
+                newMember.phoneNumber = phoneNumber;
+                newMember.cellNumber = cellNumber;
+                newMember.email = email;
+                newMember.membershipType = membershipType;
+                newMember.membershipStatus = membershipStatus;
+                newMember
+                .save()
+                return res.render('users/memberInfo', {member:newMember, error:null})
                 .catch(err => {
                     return next(err);
                 });
