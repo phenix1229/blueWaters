@@ -58,6 +58,7 @@ h2 {
 #form {
     grid-row: 2/4;
     display: inline-flex;
+    flex-direction: column;
     width: 300px;
     font-size: 25px;
     justify-self: center;
@@ -67,6 +68,6 @@ h2 {
     margin-bottom: 10px;
 }
 
-input {
+input, button {
     font-size: 25px;
 }

@@ -34,19 +34,67 @@
                 <% } %>
             </div>
             <div id="form">
-                <form role="form" method="POST" action="/api/users/register">
+                <form role="form" method="POST" action="/api/users/saveMember">
                     <h2>Enter or Update</h2>
                     <br>
                     <div>
-                        <input type="text" name="memberID" id="memberID" placeholder=" Enter Member ID">
+                        <% if(member !== undefined){ %>
+                            <input type="text" name="memberID" id="memberID" placeholder=" <%= member.id %>" disabled>
+                            <% } else { %>
+                            <input type="text" name="memberID" id="memberID" placeholder=" ID auto assigned" disabled>
+                            <% } %>
                     </div>
                     <br>
                     <div>
-                        <input type="email" name="email" id="email"placeholder=" Email Address">
+                        <input type="text" name="typeID" id="typeID"placeholder=" Type ID">
                     </div>
                     <br>
                     <div>
-                        <input type="password" name="password" id="password" placeholder=" Password">
+                        <input type="text" name="lastName" id="lastName"placeholder=" Last Name">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="firstName" id="firstName"placeholder=" First Name">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="address" id="address"placeholder=" Address">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="city" id="city"placeholder=" City">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="state" id="state"placeholder=" State">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="zipCode" id="zipCode"placeholder=" Zip Code">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="phoneNumber" id="phoneNumber"placeholder=" Phone Number">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="cellNumber" id="cellNumber"placeholder=" Cell Number">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="email" name="email" id="email"placeholder=" Email">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="dateJoined" id="dateJoined"placeholder=" Date Joined">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="memType" id="memType"placeholder=" Membership Type">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="memStatus" id="memStatus" placeholder=" Membership Status">
                     </div>
                     <br>
                     <hr>

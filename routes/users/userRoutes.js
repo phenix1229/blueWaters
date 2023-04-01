@@ -13,6 +13,12 @@ router.get('/register', (req, res) => {
 //register new user
 router.post('/register', userValidation, userController.register);
 
+//create new member
+router.post('/newMember', userValidation, userController.newMember);
+
+//find member
+router.post('/findMember', userValidation, userController.findMember);
+
 
 //render login page
 router.get('/login', userController.loginPage);

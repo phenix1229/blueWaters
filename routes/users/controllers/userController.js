@@ -11,14 +11,21 @@ const accountUtils = require('../../accounts/utils/accountUtils')
 module.exports = {
     //create new member
     newMember: (req, res) => {
-        return res.render('users/memberInfo')
+        const member = req.body.blankMember;
+        console.log(`this is the member ${member}`);
+        return res.render('users/memberInfo', {member, error:null})
     },
 
     //find member
     findMember: (req, res, next) => {
-        Member.findById(id).then(member => {
-            res.render('users/memberInfo', {member})
-        })
+        const memberID = req.body;
+        Member.findById(memberID).then(member => {
+            if(member){
+                res.render('users/memberInfo', {member})
+            }
+        }).catch(err => {
+            next (err);
+        });
     },
 
     //register new user
@@ -174,7 +181,8 @@ module.exports = {
     
     //render member info page
     memberInfoPage:(req, res) => {
-        return res.render('users/memberInfo', { error:null});
+        const member = req.body;
+        return res.render('users/memberInfo', {member, error:null});
     },
 
     //login user

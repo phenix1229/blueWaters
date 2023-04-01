@@ -34,7 +34,7 @@
                 <% } %>
             </div>
             <div id="form">
-                <form role="form" method="POST" action="/api/users/register">
+                <form role="form" method="POST" action="/api/users/findMember">
                     <h2>Search For Member</h2>
                     <!-- <hr> -->
                     <br>
@@ -44,14 +44,21 @@
                     <br>
                     <div class="row">
                     <div>
-                        <input type="submit" value="Search">
+                        <button type="submit" id="Search">Search</button>
                     </div>
                     </div>
                     <br>
-                    <hr>
-                    <br>
-                    <input type="button" value="New Member" onclick="window.location.href='/api/users/memberInfo'">
                 </form>
+                <div class="row">
+                    <div>
+                        <hr>
+                        <br>
+                        <form role="form" method="POST" action="/api/users/newMember">
+                            <input type="text" value="" id="blankMember" style="display: none;">
+                            <button type="submit" id="newMemButton">New Member</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
