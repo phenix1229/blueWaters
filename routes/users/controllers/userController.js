@@ -25,16 +25,15 @@ module.exports = {
             membershipType:"",
             membershipStatus:""
         }
-        return res.render('users/memberInfo', {member, error:null})
+        return res.render('users/createMember', {member, error:null})
     },
 
     //find member
     findMember: (req, res, next) => {
         const {memberEmail} = req.body;
-        console.log(`this is the member email ${memberEmail}`)
         Member.findOne({email:memberEmail}).then(member => {
             if(member){
-                return res.render('users/memberInfo', {member, error:null})
+                return res.render('users/updateMember', {member, error:null})
             } else {
                 return res.render('users/members', {error:"No user with this email found"})
             }
@@ -102,8 +101,8 @@ module.exports = {
     saveMember: (req, res, next) => {
         const { typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus } = req.body;
         Member.findOne({ email }).then(member => {
-            if (member) {
-                return res.render('users/memberInfo', {member:req.body, error:'Member using this email exists'});
+            if(member){
+                return res.render('users/createMember', {member:req.body, error:'Member using this email exists'});
             } else {
                 const newMember = new Member();
                 newMember.typeID = typeID;
@@ -119,14 +118,13 @@ module.exports = {
                 newMember.membershipType = membershipType;
                 newMember.membershipStatus = membershipStatus;
                 newMember
-                .save()
-                return res.render('users/memberInfo', {member:newMember, error:null})
-                .catch(err => {
-                    return next(err);
-                });
+                .save();
             }
         })
-        .catch(err => reject(err));
+        return res.redirect('/')
+        .catch(err => {
+            return next(err);
+        });
     },
 
     //render profile page
@@ -146,32 +144,59 @@ module.exports = {
         return res.redirect('/fail');
     },
     
-    //update profile
-    updateProfile: (params, id) => {
-        const {
-            name,
-            email,
-            address,
-            oldPassword,
-            newPassword,
-            repeatNewPassword
-        } = params;
-        return new Promise((resolve, reject) => {
-            User.findById(id)
-            .then(user => {
-                if (name) user.profile.name = name;
-                if (email) user.email = email;
-                if (address) user.address = address;
-                return user;
-            })
-            .then(user => {
-                user.save().then(user => {
-                resolve(user);
+    //update member profile
+    updateMember: (req, res, next) => {
+        const { memberID, typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus} = req.body;
+            console.log(req.body);
+            Member.findById({_id:memberID})
+            .then(member => {
+                if(req.body.typeID !== '') member.typeID = typeID;
+                if(req.body.lastName !== '') member.lastName = lastName;
+                if(req.body.firstName !== '') member.firstName = firstName;
+                if(req.body.address !== '') member.address = address;
+                if(req.body.city !== '') member.city = city; 
+                if(req.body.state !== '') member.state = state;
+                if(req.body.zipCode !== '') member.zipCode = zipCode;
+                if(req.body.phoneNumber !== '') member.phoneNumber = phoneNumber;
+                if(req.body.cellNumber !== '') member.cellNumber = cellNumber;
+                if(req.body.email !== '') member.email = email;
+                if(req.body.membershipType !== '') member.membershipType = membershipType;
+                if(req.body.membershipStatus !== '') member.membershipStatus = membershipStatus;
+                member.save();
                 });
-            })
-            .catch(err => reject(err));
-        }).catch(err => reject(err));
-    },
+                return res.redirect('/')
+                    .catch(err => {
+                        return next(err);
+                    });
+            },
+    // },
+    // updateMember: (params) => {
+    //     const { typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus} = params;
+    //     return new Promise((resolve, reject) => {
+    //         Member.findOne({email})
+    //         .then(member => {
+    //             if(typeID) member.typeID = typeID;
+    //             if(lastName) member.lastName = lastName;
+    //             if(firstName) member.firstName = firstName;
+    //             if(address) member.address = address;
+    //             if(city) member.city = city;
+    //             if(state) member.state = state;
+    //             if(zipCode) member.zipCode = zipCode;
+    //             if(phoneNumber) member.phoneNumber = phoneNumber;
+    //             if(cellNumber) member.cellNumber = cellNumber;
+    //             if(email) member.email = email;
+    //             if(membershipType) member.membershipType = membershipType;
+    //             if(membershipStatus) member.membershipStatus = membershipStatus;
+    //             return member;
+    //         })
+    //         .then(member => {
+    //             member.save().then(member => {
+    //             resolve(member);
+    //             });
+    //         })
+    //         .catch(err => reject(err));
+    //     }).catch(err => reject(err));
+    // },
     
     //update password
     updatePassword: (params, id) => {

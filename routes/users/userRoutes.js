@@ -39,17 +39,20 @@ router.get('/loginError', userController.loginError);
 router.get('/profile', userController.profilePage);
 
 //update profile
-router.put('/updateProfile', (req, res, next) => {
-  userController
-    .updateProfile(req.body, req.user._id)
-    .then(user => {
-      return res.redirect('/api/users/profile');
-    })
-    .catch(err => {
-      console.log(err);
-      return res.redirect('/api/users/updateProfile');
-    });
-});
+// router.put('/updateMember', (req, res, next) => {
+//   userController
+//     .updateMember(req.body)
+//     .then(member => {
+//       return res.redirect('/api/users/profile');
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       return res.redirect('/api/users/updateProfile');
+//     });
+// });
+
+//update member
+router.post('/updateMember', userController.updateMember);
 
 //render update profile page
 router.get('/updateProfile', userController.updateProfilePage)

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/login-register.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
+    <title>Create Member</title>
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <div id="nav">
+                <a href="javascript:history.back()"><h2>Back</h2></a>
+            </div>
+            <div id="title">
+                <h1>Create Member</h1>
+            </div>
+            <div id="menu">
+                <div id="menuText">
+                    <h2>Menu</h2>
+                </div>
+            </div>
+            <div id="menuOptions">
+                <a href="/"><div><p class="mOptionText">Home</p></div></a>
+                <a href="/api/users/login"><div><p class="mOptionText">Log In</p></div></a>
+            </div>
+        </div>
+        <div id="main">
+            <div id="errorField">
+                <% if (error !== null){ %>
+                    <p style="color:red; font-size: 20px;"><%= error %> </p>
+                <% } %>
+            </div>
+            <div id="form">
+                <form role="form" method="POST" action="/api/users/saveMember">
+                    <h2>Enter New Member</h2>
+                    <br>
+                    <div>
+                        <input type="text" name="typeID" id="typeID"placeholder=" <%= member.typeID %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="lastName" id="lastName"placeholder=" <%= member.lastName %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="firstName" id="firstName"placeholder=" <%= member.firstName %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="address" id="address"placeholder=" <%= member.address %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="city" id="city"placeholder=" <%= member.city %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="state" id="state"placeholder=" <%= member.state %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="zipCode" id="zipCode"placeholder=" <%= member.zipCode %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="phoneNumber" id="phoneNumber"placeholder=" <%= member.phoneNumber %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="cellNumber" id="cellNumber"placeholder=" <%= member.cellNumber %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="email" name="email" id="email"placeholder=" <%= member.email %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="membershipType" id="membershipType"placeholder=" <%= member.membershipType %>">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" name="membershipStatus" id="membershipStatus" placeholder=" <%= member.membershipStatus %>">
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="row">
+                    <div>
+                        <input type="submit" value="Save">
+                        <input type="button" value="Cancel" onclick="window.location.href='/'">
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>
