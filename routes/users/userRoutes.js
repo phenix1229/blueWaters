@@ -14,10 +14,16 @@ router.post('/newMember', userController.newMember);
 //find member
 router.post('/findMember', userController.findMember);
 
+//save new transaction
+router.post('/saveTransaction', userController.saveTransaction);
+
 //render members page
 router.get('/members', userController.membersPage);
 
-router.post('/checkMember', userController.checkMember);
+//render transactions page
+router.get('/transactions', userController.transactionsPage);
+
+// router.post('/checkMember', userController.checkMember);
 
 //render member info page
 // router.get('/memberInfo', userController.memberInfoPage);

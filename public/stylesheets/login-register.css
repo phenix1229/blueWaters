@@ -9,6 +9,11 @@ h2 {
     font-size: xx-large;
 }
 
+select {
+    background-color: #FFFFFF;
+    font-size: 25px;
+}
+
 #app {
     height: 100vh;
     display: grid;

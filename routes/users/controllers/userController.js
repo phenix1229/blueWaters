@@ -1,4 +1,5 @@
 const Member = require('../../../models/Member');
+const Transaction = require('../../../models/Transaction');
 const { validationResult } = require('express-validator');
 
 
@@ -44,7 +45,6 @@ module.exports = {
                 return res.render('users/createMember', {member:req.body, error:'Member using this email exists'});
             } 
             else {
-                console.log(req.body)
                 const newMember = new Member();
                 newMember.typeID = typeID;
                 newMember.lastName = lastName;
@@ -91,10 +91,48 @@ module.exports = {
             return next(err);
         });
     },
+
+    //save transaction
+    saveTransaction: async (req, res, next) => {
+    const { memberID, date, location, description, amount } = req.body;
+    Member.findOne({ email:memberID }).then(member => {
+        if(member){
+            const newTransaction = new Transaction();
+            newTransaction.memberID = member._id;
+            newTransaction.date = date;
+            newTransaction.location = location;
+            newTransaction.description = description;
+            newTransaction.amount = amount;
+            newTransaction.save().then(() => {
+                return res.redirect('/')
+            })
+            } else {
+                return res.render('users/transactions', {transaction:req.body, error:'Member does not exist'})
+            }
+        })
+        .catch(err => {
+            return next(err);
+        });
+    },
     
     //render members page
     membersPage:(req, res) => {
         return res.render('users/members', { error:null});
+    },
+    
+    //render transactions page
+    transactionsPage:(req, res) => {
+        const today = () =>{
+            return `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`;
+        };
+        const transaction = {
+            memberID: "",
+            date:today(),
+            location:"",
+            description:"",
+            amount:""
+        }
+        return res.render('users/transactions', { transaction, error:null});
     },
 
     //render login error page
