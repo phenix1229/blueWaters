@@ -1,5 +1,6 @@
 const Member = require('../../../models/Member');
 const Transaction = require('../../../models/Transaction');
+const MemberFee = require('../../../models/MemberFee');
 const { validationResult } = require('express-validator');
 
 
@@ -93,7 +94,7 @@ module.exports = {
     },
 
     //save transaction
-    saveTransaction: async (req, res, next) => {
+    saveTransaction: (req, res, next) => {
     const { memberID, date, location, description, amount } = req.body;
     Member.findOne({ email:memberID }).then(member => {
         if(member){
@@ -115,9 +116,78 @@ module.exports = {
         });
     },
     
+    //new member fee
+    newMemberFee: (req,res) => {
+        const fee = {
+            typeID:"",
+            membershipType:"",
+            monthlyFee:"",
+            minMonthlyCharge:""
+        }
+        res.render('users/newMemberFee', {fee, error:null});
+    },
+
+    //save new member fee
+    saveMemberFee: (req, res, next) => {
+    const { typeID, membershipType, monthlyFee, minMonthlyCharge } = req.body;
+    MemberFee.findOne({ membershipType }).then(memberFee => {
+        if(memberFee){
+            res.render('users/newMemberFee', {fee, error:'Fee of this type exists'})
+        } else {}
+            const newMemberFee = new MemberFee();
+            newMemberFee.typeID = typeID;
+            newMemberFee.membershipType = membershipType;
+            newMemberFee.monthlyFee = monthlyFee;
+            newMemberFee.minMonthlyCharge = minMonthlyCharge;
+            newMemberFee.save().then(() => {
+                return res.redirect('/')
+            })
+        })
+        .catch(err => {
+            return next(err);
+        });
+    },
+
+    //find member fee
+    findMemberFee: (req, res, next) => {
+        const {feeType} = req.body;
+        MemberFee.findOne({membershipType:feeType}).then(fee => {
+            if(fee){
+                return res.render('users/updateMemberFees', {fee, error:null})
+            } else {
+                return res.render('users/memberFees', {error:"No fee of this type found"})
+            }
+        }).catch(err => {
+            next (err);
+        });
+    },
+
+    //update member fee
+    updateMemberFee: (req, res, next) => {
+        const { ID, typeID, membershipType, monthlyFee, minMonthlyCharge } = req.body;
+        MemberFee.findById({_id:ID})
+        .then(fee => {
+            if(req.body.typeID !== '') fee.typeID = typeID;
+            if(req.body.membershipType !== '') fee.membershipType = membershipType;
+            if(req.body.monthlyFee !== '') fee.monthlyFee = monthlyFee;
+            if(req.body.minMonthlyCharge !== '') fee.minMonthlyCharge = minMonthlyCharge;
+            fee.save().then(() => {
+                return res.redirect('/');
+            })
+        })
+        .catch(err => {
+            return next(err);
+        });
+    },
+    
     //render members page
     membersPage:(req, res) => {
         return res.render('users/members', { error:null});
+    },
+    
+    //render member fees page
+    memberFeesPage:(req, res) => {
+        return res.render('users/memberFees', { error:null});
     },
     
     //render transactions page
