@@ -179,19 +179,33 @@ module.exports = {
             return next(err);
         });
     },
+
+    //create invoice
+    createInvoice: (req, res, next) => {
+        const {memberEmail} = req.body;
+        Member.findOne({email:memberEmail}).then(member => {
+            if(member){
+                return res.render('users/memberInvoices', {member, error:null})
+            } else {
+                return res.render('users/memberInvoices', {error:"No user with this email found"})
+            }
+        }).catch(err => {
+            next (err);
+        });
+    },
     
     //render members page
-    membersPage:(req, res) => {
+    membersPage: (req, res) => {
         return res.render('users/members', { error:null});
     },
     
     //render member fees page
-    memberFeesPage:(req, res) => {
+    memberFeesPage: (req, res) => {
         return res.render('users/memberFees', { error:null});
     },
     
     //render transactions page
-    transactionsPage:(req, res) => {
+    transactionsPage: (req, res) => {
         const today = () =>{
             return `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`;
         };
@@ -203,6 +217,16 @@ module.exports = {
             amount:""
         }
         return res.render('users/transactions', { transaction, error:null});
+    },
+
+    //render reports page
+    reportsPage: (req, res) => {
+        res.render('users/reports');
+    },
+    
+    //render member invoices page
+    memberInvoicesPage: (req, res) => {
+        res.render('users/memberInvoices', {error:null});
     },
 
     //render login error page

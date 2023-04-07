@@ -26,14 +26,23 @@ router.post('/saveTransaction', userController.saveTransaction);
 //save new member fee
 router.post('/saveMemberFee', userController.saveMemberFee);
 
+//create member invoice
+router.post('/createInvoice', userController.createInvoice);
+
 //render members page
 router.get('/members', userController.membersPage);
+
+//render member invoices
+router.get('/memberInvoices', userController.memberInvoicesPage);
 
 //render transactions page
 router.get('/transactions', userController.transactionsPage);
 
 //render member fees page
 router.get('/memberFees', userController.memberFeesPage);
+
+//render reports page
+router.get('/reports', userController.reportsPage);
 
 // router.post('/checkMember', userController.checkMember);
 
