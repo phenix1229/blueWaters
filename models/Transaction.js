@@ -6,7 +6,7 @@ const TransactionSchema = mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now
+        required: true
     },
     location: {
         type: String,

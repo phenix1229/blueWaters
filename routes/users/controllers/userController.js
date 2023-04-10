@@ -1,6 +1,7 @@
 const Member = require('../../../models/Member');
 const Transaction = require('../../../models/Transaction');
 const MemberFee = require('../../../models/MemberFee');
+const reportUtils = require('../utils/reports')
 const { validationResult } = require('express-validator');
 
 
@@ -182,10 +183,66 @@ module.exports = {
 
     //create invoice
     createInvoice: (req, res, next) => {
-        const {memberEmail} = req.body;
+        const {memberEmail, year, month} = req.body;
+        let currentMember = {};
+        let bFees = 0;
+        let rFees = 0;
+        let psFees = 0;
+        let tglFees = 0;
+        let totalFees = 0;
         Member.findOne({email:memberEmail}).then(member => {
             if(member){
-                return res.render('users/memberInvoices', {member, error:null})
+                // const transArray = [];
+                Transaction.find({memberID:member._id}).then(transactions => {
+                    transactions.forEach(item => {
+                        const tDate = String(item.date);
+                        if(tDate.slice(11,15) === year){
+                            if(tDate.slice(4,7) === month){
+                                // transArray.push(item);
+                                switch (item.location){
+                                    case "bar":
+                                        bFees += item.amount;
+                                        break;
+                                    case "restaurant":
+                                        rFees += item.amount;
+                                        break;
+                                    case "proShop":
+                                        psFees += item.amount;
+                                        break;
+                                    case "tennisGolfLessons":
+                                        tglFees += item.amount;
+                                        break;
+                                }
+                            }
+                        }
+                    })
+                    console.log(bFees,rFees,psFees,tglFees)
+                    return currentMember = member;
+                    // return transArray;
+                // })
+                // .then(transArray => {
+                //     const subTotal = reportUtils.addAll(transArray);
+                //     return subTotal
+                }).then(
+                    // subTotal => {
+                        currentMember => {
+                    MemberFee.findOne({membershipType:currentMember.membershipType}).then(feeType => {
+                        // if(feeType.minMonthlyCharge < subTotal){
+                        if(feeType.minMonthlyCharge < (bFees+rFees+psFees+tglFees)){
+                            // totalFees = feeType.monthlyFee + subTotal;
+                            totalFees = feeType.monthlyFee + (bFees+rFees+psFees+tglFees);
+                        } else {
+                            totalFees = feeType.monthlyFee + feeType.minMonthlyCharge;
+                        }
+                        // return res.render('users/memberInvoices', {error:totalFees});
+                        return res.render('users/memberInvoices', {error:`bfees = ${bFees} totalfees = ${totalFees}`});
+                    })
+                })
+                // }).then(feeType => {
+                //     const minMonthlyCharge = feeType.minMonthlyCharge;
+                //     console.log(`mmc = ${minMonthlyCharge}`)
+                    // return res.render('users/memberInvoices', {member, error:subTotal})
+                // })
             } else {
                 return res.render('users/memberInvoices', {error:"No user with this email found"})
             }
