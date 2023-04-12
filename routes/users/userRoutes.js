@@ -61,5 +61,8 @@ router.post('/updateMember', userController.updateMember);
 //update member fee
 router.post('/updateMemberFee', userController.updateMemberFee);
 
+//monthly summary by area
+router.get('/monthlySummary', userController.monthlySummaryPage);
+
 
 module.exports = router;

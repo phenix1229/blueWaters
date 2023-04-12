@@ -281,6 +281,11 @@ module.exports = {
     monthlyInvoicePage: (req, res) => {
         return res.render('users/monthlyInvoice', {month,year,subtotal:0,totalFees:0,transArray:[],member:{}, error:null});
     },
+    
+    //render monthly summary page
+    monthlySummaryPage: (req, res) => {
+        return res.render('users/monthlySummary', {month:"",year:"",rTotal:0,bTotal:0,psTotal:0,tglTotal:0,monthlyTotal:0, error:null});
+    },
 
     //render login error page
     loginError: (req, res) => {
