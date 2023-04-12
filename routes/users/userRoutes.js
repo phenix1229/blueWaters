@@ -61,8 +61,10 @@ router.post('/updateMember', userController.updateMember);
 //update member fee
 router.post('/updateMemberFee', userController.updateMemberFee);
 
-//monthly summary by area
+//render monthly summary by area
 router.get('/monthlySummary', userController.monthlySummaryPage);
 
+//render select summary date page
+router.get('/createMonthlySummary', userController.createMonthlySummaryPage)
 
 module.exports = router;

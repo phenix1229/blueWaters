@@ -286,6 +286,11 @@ module.exports = {
     monthlySummaryPage: (req, res) => {
         return res.render('users/monthlySummary', {month:"",year:"",rTotal:0,bTotal:0,psTotal:0,tglTotal:0,monthlyTotal:0, error:null});
     },
+    
+    //render create monthly summary page
+    createMonthlySummaryPage: (req, res) => {
+        return res.render('users/createMonthlySummary', {error:null});
+    },
 
     //render login error page
     loginError: (req, res) => {
