@@ -46,7 +46,7 @@
     grid-column: 1/2;
     padding-left: 10px;
     height: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
 }
 
@@ -54,21 +54,21 @@
     grid-column: 2/3;
     padding-left: 10px;
     height: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 #actionAmount {
     grid-column: 3/4;
     padding-left: 10px;
     height: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 #newBalance {
     grid-column: 4/5;
     padding-left: 10px;
     height: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 #table {

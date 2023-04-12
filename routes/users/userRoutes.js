@@ -44,6 +44,9 @@ router.get('/memberFees', userController.memberFeesPage);
 //render reports page
 router.get('/reports', userController.reportsPage);
 
+//render monthly invoice page
+router.get('/monthlyInvoice', userController.monthlyInvoicePage);
+
 // router.post('/checkMember', userController.checkMember);
 
 //render member info page

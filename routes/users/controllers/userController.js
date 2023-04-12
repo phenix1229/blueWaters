@@ -185,20 +185,23 @@ module.exports = {
     createInvoice: (req, res, next) => {
         const {memberEmail, year, month} = req.body;
         let currentMember = {};
+        const transArray = [];
         let bFees = 0;
         let rFees = 0;
         let psFees = 0;
         let tglFees = 0;
+        let feeMet = false;
+        let monthlyFee = 0;
+        let minMonthlyCharge = 0;
         let totalFees = 0;
         Member.findOne({email:memberEmail}).then(member => {
             if(member){
-                // const transArray = [];
                 Transaction.find({memberID:member._id}).then(transactions => {
                     transactions.forEach(item => {
                         const tDate = String(item.date);
                         if(tDate.slice(11,15) === year){
                             if(tDate.slice(4,7) === month){
-                                // transArray.push(item);
+                                transArray.push(item);
                                 switch (item.location){
                                     case "bar":
                                         bFees += item.amount;
@@ -209,40 +212,28 @@ module.exports = {
                                     case "proShop":
                                         psFees += item.amount;
                                         break;
-                                    case "tennisGolfLessons":
+                                    case "tennis/golf lessons":
                                         tglFees += item.amount;
                                         break;
                                 }
                             }
                         }
                     })
-                    console.log(bFees,rFees,psFees,tglFees)
                     return currentMember = member;
-                    // return transArray;
-                // })
-                // .then(transArray => {
-                //     const subTotal = reportUtils.addAll(transArray);
-                //     return subTotal
-                }).then(
-                    // subTotal => {
-                        currentMember => {
-                    MemberFee.findOne({membershipType:currentMember.membershipType}).then(feeType => {
-                        // if(feeType.minMonthlyCharge < subTotal){
-                        if(feeType.minMonthlyCharge < (bFees+rFees+psFees+tglFees)){
-                            // totalFees = feeType.monthlyFee + subTotal;
-                            totalFees = feeType.monthlyFee + (bFees+rFees+psFees+tglFees);
+                }).then(currentMember => {
+                    MemberFee.findOne({membershipType:currentMember.membershipType})
+                    .then(feeType => {
+                        monthlyFee = feeType.monthlyFee;
+                        minMonthlyCharge = feeType.minMonthlyCharge;
+                        if(minMonthlyCharge < (bFees+rFees+psFees+tglFees)){
+                            feeMet = true;
+                            totalFees = monthlyFee + (bFees+rFees+psFees+tglFees);
                         } else {
-                            totalFees = feeType.monthlyFee + feeType.minMonthlyCharge;
+                            totalFees = monthlyFee + minMonthlyCharge;
                         }
-                        // return res.render('users/memberInvoices', {error:totalFees});
-                        return res.render('users/memberInvoices', {error:`bfees = ${bFees} totalfees = ${totalFees}`});
+                        return res.render('users/monthlyInvoice', {monthlyFee,minMonthlyCharge,feeMet,subtotal:(bFees+rFees+psFees+tglFees),totalFees,transArray,member:currentMember, error:null});
                     })
                 })
-                // }).then(feeType => {
-                //     const minMonthlyCharge = feeType.minMonthlyCharge;
-                //     console.log(`mmc = ${minMonthlyCharge}`)
-                    // return res.render('users/memberInvoices', {member, error:subTotal})
-                // })
             } else {
                 return res.render('users/memberInvoices', {error:"No user with this email found"})
             }
@@ -284,6 +275,11 @@ module.exports = {
     //render member invoices page
     memberInvoicesPage: (req, res) => {
         res.render('users/memberInvoices', {error:null});
+    },
+
+    //render monthly invoice page
+    monthlyInvoicePage: (req, res) => {
+        return res.render('users/monthlyInvoice', {month,year,subtotal:0,totalFees:0,transArray:[],member:{}, error:null});
     },
 
     //render login error page
