@@ -64,7 +64,7 @@ router.post('/updateMemberFee', userController.updateMemberFee);
 //render monthly summary by area
 router.get('/monthlySummary', userController.monthlySummaryPage);
 
-//render select monthly summary date page
+//render create monthly summary date page
 router.get('/createMonthlySummary', userController.createMonthlySummaryPage)
 
 //create monthly summary
@@ -73,10 +73,19 @@ router.post('/createMonthlySummary', userController.createMonthlySummary)
 //render daily summary by area
 router.get('/dailySummary', userController.dailySummaryPage);
 
-//render select summary date page
+//render create summary date page
 router.get('/createDailySummary', userController.createDailySummaryPage)
 
 //create monthly summary
 router.post('/createDailySummary', userController.createDailySummary)
+
+//render monthly member sales
+router.get('/monthlyMemberSales', userController.monthlyMemberSalesPage);
+
+//render create monthly member sales page
+router.get('/createMonthlyMemberSales', userController.createMonthlyMemberSalesPage)
+
+//create monthly member sales
+router.post('/createMonthlyMemberSales', userController.createMonthlyMemberSales)
 
 module.exports = router;

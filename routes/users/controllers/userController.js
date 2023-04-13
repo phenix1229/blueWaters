@@ -287,7 +287,6 @@ module.exports = {
         Transaction.find().then(trans => {
                 trans.forEach(item => {
                     const tDate = String(item.date);
-                    console.log(tDate)
                     if(tDate.slice(11,15) === year){
                         if(tDate.slice(4,7) === month){
                             if(tDate.slice(8,10) === day){
@@ -303,7 +302,6 @@ module.exports = {
                                         break;
                                     case "tennis/golf lessons":
                                         tglFees += item.amount;
-                                        console.log(`tglFees = ${tglFees}`)
                                         break;
                                 }
                             }
@@ -311,6 +309,38 @@ module.exports = {
                     }
                 })
                     return res.render('users/dailySummary', {month,year,day,bFees,rFees,psFees,tglFees,totalFees:(bFees+rFees+psFees+tglFees), error:null});
+        }).catch(err => {
+            next (err);
+        });
+    },
+
+    //create monthly member sales summary
+    createMonthlyMemberSales: (req, res, next) => {
+        const {year, month} = req.body;
+        const salesList = [];
+        let memTotal = 0;
+        Member.find().then(member => {
+            member.forEach(mem => {
+                // let memTotal = 0;
+                Transaction.find({memberID:mem._id}).then(trans => {
+                    trans.forEach(item => {
+                        console.log(item)
+                        const tDate = String(item.date);
+                        if(tDate.slice(11,15) === year){
+                            if(tDate.slice(4,7) === month){
+                                memTotal += item.amount;
+                            }
+                        }
+                    })
+                    // return memTotal
+                })
+                  
+                console.log(`memTotal = ${memTotal}`)
+                salesList.push([`${mem.lastName}, ${mem.firstName}`, memTotal]);
+                memTotal = 0;
+            })
+        }).then(mem => {
+            return res.render('users/monthlyMemberSales', {month,year,salesList, error:null});
         }).catch(err => {
             next (err);
         });
@@ -375,6 +405,21 @@ module.exports = {
     createDailySummaryPage: (req, res) => {
         return res.render('users/createDailySummary', {error:null});
     },
+    
+    //render create monthly member sales page
+    createMonthlyMemberSalesPage: (req, res) => {
+        return res.render('users/createMonthlyMemberSales', {error:null});
+    },
+    
+    //render monthly member sales page
+    monthlyMemberSalesPage: (req, res) => {
+        return res.render('users/monthlyMemberSales', {month:"",year:"",salesList:[], error:null});
+    },
+    
+    //render create daily summary page
+    // createDailySummaryPage: (req, res) => {
+    //     return res.render('users/createDailySummary', {error:null});
+    // },
 
     //render login error page
     loginError: (req, res) => {
