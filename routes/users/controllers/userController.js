@@ -276,6 +276,45 @@ module.exports = {
             next (err);
         });
     },
+    
+    //create daily summary
+    createDailySummary: (req, res, next) => {
+        const {year, month, day} = req.body;
+        let bFees = 0;
+        let rFees = 0;
+        let psFees = 0;
+        let tglFees = 0;
+        Transaction.find().then(trans => {
+                trans.forEach(item => {
+                    const tDate = String(item.date);
+                    console.log(tDate)
+                    if(tDate.slice(11,15) === year){
+                        if(tDate.slice(4,7) === month){
+                            if(tDate.slice(8,10) === day){
+                                switch (item.location){
+                                    case "bar":
+                                        bFees += item.amount;
+                                        break;
+                                    case "restaurant":
+                                        rFees += item.amount;
+                                        break;
+                                    case "proShop":
+                                        psFees += item.amount;
+                                        break;
+                                    case "tennis/golf lessons":
+                                        tglFees += item.amount;
+                                        console.log(`tglFees = ${tglFees}`)
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                })
+                    return res.render('users/dailySummary', {month,year,day,bFees,rFees,psFees,tglFees,totalFees:(bFees+rFees+psFees+tglFees), error:null});
+        }).catch(err => {
+            next (err);
+        });
+    },
 
     //render members page
     membersPage: (req, res) => {
@@ -325,6 +364,16 @@ module.exports = {
     //render create monthly summary page
     createMonthlySummaryPage: (req, res) => {
         return res.render('users/createMonthlySummary', {error:null});
+    },
+    
+    //render daily summary page
+    dailySummaryPage: (req, res) => {
+        return res.render('users/dailySummary', {month:"",year:"",day:"",rFees:0,bFees:0,psFees:0,tglFees:0,totalFees:0, error:null});
+    },
+    
+    //render create daily summary page
+    createDailySummaryPage: (req, res) => {
+        return res.render('users/createDailySummary', {error:null});
     },
 
     //render login error page
