@@ -36,8 +36,7 @@
             <div id="summary">
                 <div class="row">
                     <h2>Monthly Sales Report by Club Area</h2>
-                    <!-- <br> -->
-                    <h2>For: <%= month %>, <% year %></h2>
+                    <h2>For: <%= month %>, <%= year %></h2>
                     <br>
                 </div>
                 <div class="columns">
@@ -52,28 +51,28 @@
                         Restaurant
                     </div>
                     <div class="column2">
-                        $<%= rTotal %>
+                        $<%= rFees %>
                     </div>
                     <div class="column1">
                         Bar
                     </div>
                     <div class="column2">
-                        $<%= bTotal %>
+                        $<%= bFees %>
                     </div>
                     <div class="column1">
                         Pro Shop
                     </div>
                     <div class="column2">
-                        $<%= psTotal %>
+                        $<%= psFees %>
                     </div>
                     <div class="column1">
                         Tennis/Golf Lessons
                     </div>
                     <div class="column2">
-                        $<%= tglTotal %>
+                        $<%= tglFees %>
                     </div>
                     <div class="column2">
-                        Total   $<%= monthlyTotal %>
+                        Total   $<%= totalFees %>
                     </div>
                 </div>
             </div>

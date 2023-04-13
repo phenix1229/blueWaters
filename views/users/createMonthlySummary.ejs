@@ -34,14 +34,15 @@
                 <% } %>
             </div>
             <div id="form">
-                <form role="form" method="POST" action="/api/users/createInvoice">
-                    <h2>Select Date</h2>
+                <form role="form" method="POST" action="/api/users/createMonthlySummary">
+                    <h2>Enter Month/Year</h2>
                     <br>
                     <div>
-                        <input type="text" name="year" id="year" placeholder=" Enter Invoice Year">
+                        <input type="text" name="year" id="year" placeholder=" Enter Summary Year">
                     </div>
                     <br>
                     <div>
+                        <label for="month">Select Month</label>
                         <select name="month" id="month">
                             <option value="Jan">Jan</option>
                             <option value="Feb">Feb</option>
@@ -60,7 +61,7 @@
                     <br>
                     <div class="row">
                     <div>
-                        <button type="submit" id="Search">Create</button>
+                        <button type="submit" id="create">Create</button>
                     </div>
                     </div>
                     <br>

@@ -242,6 +242,41 @@ module.exports = {
         });
     },
     
+    //create monthly summary
+    createMonthlySummary: (req, res, next) => {
+        const {year, month} = req.body;
+        let bFees = 0;
+        let rFees = 0;
+        let psFees = 0;
+        let tglFees = 0;
+        Transaction.find().then(trans => {
+                trans.forEach(item => {
+                    const tDate = String(item.date);
+                    if(tDate.slice(11,15) === year){
+                        if(tDate.slice(4,7) === month){
+                            switch (item.location){
+                                case "bar":
+                                    bFees += item.amount;
+                                    break;
+                                case "restaurant":
+                                    rFees += item.amount;
+                                    break;
+                                case "proShop":
+                                    psFees += item.amount;
+                                    break;
+                                case "tennis/golf lessons":
+                                    tglFees += item.amount;
+                                    break;
+                            }
+                        }
+                    }
+                })
+                    return res.render('users/monthlySummary', {month,year,bFees,rFees,psFees,tglFees,totalFees:(bFees+rFees+psFees+tglFees), error:null});
+        }).catch(err => {
+            next (err);
+        });
+    },
+
     //render members page
     membersPage: (req, res) => {
         return res.render('users/members', { error:null});
@@ -284,7 +319,7 @@ module.exports = {
     
     //render monthly summary page
     monthlySummaryPage: (req, res) => {
-        return res.render('users/monthlySummary', {month:"",year:"",rTotal:0,bTotal:0,psTotal:0,tglTotal:0,monthlyTotal:0, error:null});
+        return res.render('users/monthlySummary', {month:"",year:"",rFees:0,bFees:0,psFees:0,tglFees:0,totalFees:0, error:null});
     },
     
     //render create monthly summary page

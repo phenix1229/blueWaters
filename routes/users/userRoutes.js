@@ -67,4 +67,7 @@ router.get('/monthlySummary', userController.monthlySummaryPage);
 //render select summary date page
 router.get('/createMonthlySummary', userController.createMonthlySummaryPage)
 
+//create monthly summary
+router.post('/createMonthlySummary', userController.createMonthlySummary)
+
 module.exports = router;
