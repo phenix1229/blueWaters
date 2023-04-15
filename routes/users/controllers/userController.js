@@ -1,7 +1,6 @@
 const Member = require('../../../models/Member');
 const Transaction = require('../../../models/Transaction');
 const MemberFee = require('../../../models/MemberFee');
-const reportUtils = require('../utils/reports')
 const { validationResult } = require('express-validator');
 
 
@@ -287,63 +286,48 @@ module.exports = {
         Transaction.find().then(trans => {
                 trans.forEach(item => {
                     const tDate = String(item.date);
-                    if(tDate.slice(11,15) === year){
-                        if(tDate.slice(4,7) === month){
-                            if(tDate.slice(8,10) === day){
-                                switch (item.location){
-                                    case "bar":
-                                        bFees += item.amount;
-                                        break;
-                                    case "restaurant":
-                                        rFees += item.amount;
-                                        break;
-                                    case "proShop":
-                                        psFees += item.amount;
-                                        break;
-                                    case "tennis/golf lessons":
-                                        tglFees += item.amount;
-                                        break;
-                                }
-                            }
+                    if(tDate.slice(11,15) === year && tDate.slice(4,7) === month && tDate.slice(8,10) === day){
+                        switch (item.location){
+                            case "bar":
+                                bFees += item.amount;
+                                break;
+                            case "restaurant":
+                                rFees += item.amount;
+                                break;
+                            case "proShop":
+                                psFees += item.amount;
+                                break;
+                            case "tennis/golf lessons":
+                                tglFees += item.amount;
+                                break;
                         }
                     }
                 })
-                    return res.render('users/dailySummary', {month,year,day,bFees,rFees,psFees,tglFees,totalFees:(bFees+rFees+psFees+tglFees), error:null});
+            return res.render('users/dailySummary', {month,year,day,bFees,rFees,psFees,tglFees,totalFees:(bFees+rFees+psFees+tglFees), error:null});
         }).catch(err => {
             next (err);
         });
     },
 
     //create monthly member sales summary
-    createMonthlyMemberSales: (req, res, next) => {
+    createMonthlyMemberSales: async (req, res, next) => {
         const {year, month} = req.body;
-        const salesList = [];
+        const salesList = [[],[]];
         let memTotal = 0;
-        Member.find().then(member => {
-            member.forEach(mem => {
-                // let memTotal = 0;
-                Transaction.find({memberID:mem._id}).then(trans => {
-                    trans.forEach(item => {
-                        console.log(item)
-                        const tDate = String(item.date);
-                        if(tDate.slice(11,15) === year){
-                            if(tDate.slice(4,7) === month){
-                                memTotal += item.amount;
-                            }
-                        }
-                    })
-                    // return memTotal
-                })
-                  
-                console.log(`memTotal = ${memTotal}`)
-                salesList.push([`${mem.lastName}, ${mem.firstName}`, memTotal]);
-                memTotal = 0;
-            })
-        }).then(mem => {
-            return res.render('users/monthlyMemberSales', {month,year,salesList, error:null});
-        }).catch(err => {
-            next (err);
-        });
+        const members = await Member.find()
+        for(let i = 0; i < members.length; i++){
+            salesList[0].push([`${members[i].lastName}, ${members[i].firstName}`]);
+            const trans = await Transaction.find({memberID:members[i]._id})
+            for(item of trans){
+                const tDate = String(item.date)
+                if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
+                    memTotal += item.amount;
+                }
+            }
+            salesList[1].push(memTotal);
+            memTotal = 0
+        }
+        return res.render('users/monthlyMemberSales',{month, year, salesList, error:null})
     },
 
     //render members page
@@ -415,11 +399,6 @@ module.exports = {
     monthlyMemberSalesPage: (req, res) => {
         return res.render('users/monthlyMemberSales', {month:"",year:"",salesList:[], error:null});
     },
-    
-    //render create daily summary page
-    // createDailySummaryPage: (req, res) => {
-    //     return res.render('users/createDailySummary', {error:null});
-    // },
 
     //render login error page
     loginError: (req, res) => {

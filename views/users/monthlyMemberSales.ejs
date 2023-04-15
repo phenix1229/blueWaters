@@ -47,19 +47,19 @@
                     <hr>
                 </div>
                 <div class="columns">
-                    <% if(salesList !== ['']){ %>
-                        <% salesList.forEach(item => { %>
+                    <% if(salesList !== []){ %>
+                        <% for(let i = 0; i < salesList[0].length; i++){ %>
                             <div class="column1">
-                                <%= item[0] %>
+                                <%= salesList[0][i] %>
                             </div>
                             <div class="column2">
-                                $<%= item[1] %>
+                                $<%= salesList[1][i] %>
                             </div>
-                        <% }) %>
+                        <% } %>
                     <% } %>
                 </div>
             </div>
-                    <br>
+            <div class="row"><br><br><br></div>
             </div>
         </div>
     </div>
