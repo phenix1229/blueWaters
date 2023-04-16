@@ -33,66 +33,94 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="memberUpdateForm">
                 <form role="form" method="POST" action="/api/users/updateMember">
-                    <h2>Update Member</h2>
+                    <h2 style="text-align: center;">Update Member</h2>
                     <br>
                     <div>
                         <input type="text" name="memberID" id="memberID" value="<%= member.id %>" style="display: none;" >
                     </div>
                     <br>
-                    <div>
-                        <input type="text" name="typeID" id="typeID" value="<%= member.typeID %>">
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="typeID">Type ID</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="typeID" id="typeID" value="<%= member.typeID %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="lastName">Last Name</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="lastName" id="lastName" value="<%= member.lastName %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="firstName">First Name</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="firstName" id="firstName" value="<%= member.firstName %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="address" id="address" value="<%= member.address %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="city">City</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="city" id="city" value="<%= member.city %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="state">State</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="state" id="state" value="<%= member.state %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="zipCode">Zip Code</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="zipCode" id="zipCode" value="<%= member.zipCode %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="phoneNumber">Phone Number</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="phoneNumber" id="phoneNumber" value="<%= member.phoneNumber %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="cellNumber">Cell Number</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="cellNumber" id="cellNumber" value="<%= member.cellNumber %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="email" name="email" id="email" value="<%= member.email %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="dateJoined">Date Joined</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="dateJoined" id="dateJoined" value="<%= member.dateJoined %>" disabled>
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="membershipType">Membership Type</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="membershipType" id="membershipType" value="<%= member.membershipType %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="membershipStatus">Membership Status</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="membershipStatus" id="membershipStatus" value="<%= member.membershipStatus %>">
+                        </div>
                     </div>
-                    <br>
-                    <div>
-                        <input type="text" name="lastName" id="lastName" value="<%= member.lastName %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="firstName" id="firstName" value="<%= member.firstName %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="address" id="address" value="<%= member.address %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="city" id="city" value="<%= member.city %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="state" id="state" value="<%= member.state %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="zipCode" id="zipCode" value="<%= member.zipCode %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="phoneNumber" id="phoneNumber" value="<%= member.phoneNumber %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="cellNumber" id="cellNumber" value="<%= member.cellNumber %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="email" name="email" id="email" value="<%= member.email %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="dateJoined" id="dateJoined" value="<%= member.dateJoined %>" disabled>
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="membershipType" id="membershipType" value="<%= member.membershipType %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="membershipStatus" id="membershipStatus" value="<%= member.membershipStatus %>">
-                    </div>
-                    <br>
                     <hr>
                     <br>
                     <div class="row">

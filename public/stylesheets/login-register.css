@@ -73,6 +73,19 @@ select {
     margin-bottom: 10px;
 }
 
+#memberUpdateForm {
+    grid-row: 2/4;
+    display: inline-flex;
+    flex-direction: column;
+    width: 600px;
+    font-size: 25px;
+    justify-self: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
 input, button {
     font-size: 25px;
 }
@@ -105,4 +118,18 @@ input, button {
     grid-column: 2/3;
     text-align: right;
     margin-top: 15px;
+}
+
+.membersColumn1 {
+    grid-column: 1/2;
+    text-align: left;
+    margin-top: 15px;
+    background-color: dodgerblue;
+}
+
+.membersColumn2 {
+    grid-column: 2/3;
+    text-align: right;
+    margin-top: 15px;
+    background-color: dodgerblue;
 }
