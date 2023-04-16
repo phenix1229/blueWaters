@@ -2,9 +2,9 @@
     grid-column: 3/4;
     grid-row: 1/2;
     display: flex;
-    /* justify-self: right; */
     justify-content: right;
     padding: 15px 30px 10px 0;
+    background-color: dodgerblue;
 }
 
 #menuText {

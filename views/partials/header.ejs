@@ -1,9 +1,24 @@
-<div id="header">
-    <div id="nav">
-    </div>
+<div id="header" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <% if(nav !== "none"){ %>
+        <div id="nav">
+            <a href="javascript:history.back()"><h2>Back</h2></a>
+        </div>
+    <% } else { %>
+        <div id="nav">
+        </div>
+    <% } %>
     <div id="title">
-        <h1>Blue Waters Country Club</h1>
+        <h1><%= title %></h1>
     </div>
-    <div id="menu">
-    </div>
+    <% if(menu !== "none"){ %>
+        <div id="menu">
+            <div id="menuText">
+                <h2>Menu</h2>
+            </div>
+            <%- include ('menuOptions') %>
+        </div>
+    <% } else { %>
+        <div id="menu">
+        </div>
+    <% } %>
 </div>

@@ -279,7 +279,7 @@ module.exports = {
     //create daily summary
     createDailySummary: (req, res, next) => {
         const {year, month, day} = req.body;
-        if(year.length < 4 || year.length > 4 || Number(year) === NAN){
+        if(year.length < 4 || year.length > 4 || Number(year) === NaN){
             res.render('users/createDailySummary', {error:"Please enter four digit year."})
         }
         let bFees = 0;
