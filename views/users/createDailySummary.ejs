@@ -19,84 +19,82 @@
             </div>
             <div id="form">
                 <form role="form" method="POST" action="/api/users/createDailySummary">
-                    <h2>Enter Date</h2>
+                    <h2 style="text-align: center;">Enter Date</h2>
                     <br>
                     <div>
                         <input type="text" name="year" id="year" placeholder=" Enter Summary Year">
                     </div>
                     <br>
-                    <div>
-                        <label for="month">Select Month</label>
-                        <select name="month" id="month">
-                            <option value="Jan">Jan</option>
-                            <option value="Feb">Feb</option>
-                            <option value="Mar">Mar</option>
-                            <option value="Apr">Apr</option>
-                            <option value="May">May</option>
-                            <option value="Jun">Jun</option>
-                            <option value="Jul">Jul</option>
-                            <option value="Aug">Aug</option>
-                            <option value="Sep">Sep</option>
-                            <option value="Oct">Oct</option>
-                            <option value="Nov">Nov</option>
-                            <option value="Dec">Dec</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div>
-                        <label for="day">Select Day</label>
-                        <select name="day" id="day">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                        </select>
-                    </div>
-                    <br>
-                    <!-- <div>
-                        <input type="text" name="day" id="day" placeholder=" Enter Day">
-                    </div>
-                    <br> -->
-                    <div class="row">
-                    <div>
-                        <button type="submit" id="create">Create</button>
-                    </div>
-                    </div>
-                    <br>
-                </form>
-                <div class="row">
-                    <div>
-                        <hr>
+                    <div class="columns">
+                        <div class="dailySumColumn1">
+                            <label for="month">Select Month</label>
+                        </div>
+                        <div class="dailySumColumn2">
+                            <select name="month" id="month">
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Dec">Dec</option>
+                            </select>
+                        </div>
                         <br>
-                        <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        <div class="dailySumColumn1">
+                            <label for="day">Select Day</label>
+                        </div>
+                        <div class="dailySumColumn2">
+                            <select name="day" id="day">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                        <div class="column1"></div>
+                        <div class="column2"></div>
+                        <div class="column1"></div>
+                        <div class="column2"></div>
+                        <div class="column1">
+                            <button type="submit" id="create">Create</button>
+                        </div>
+                        <div class="column2">
+                            <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>

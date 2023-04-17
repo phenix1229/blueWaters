@@ -4,7 +4,8 @@
     display: flex;
     justify-content: right;
     padding: 15px 30px 10px 0;
-    background-color: dodgerblue;
+    background-color: #00addc;
+    /* background-color: dodgerblue; */
 }
 
 #menuText {
