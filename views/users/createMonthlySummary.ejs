@@ -17,46 +17,44 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/createMonthlySummary">
-                    <h2>Enter Month/Year</h2>
+                    <h2 style="text-align: center;">Enter Month/Year</h2>
                     <br>
-                    <div>
-                        <input type="text" name="year" id="year" placeholder=" Enter Summary Year">
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="year">Enter Year</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="year" id="year">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="month">Select Month</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <select name="month" id="month">
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Dec">Dec</option>
+                            </select>
+                        </div>
+                        <div class="column1" style="text-align: center;">
+                            <button type="submit" id="create">Create</button>
+                        </div>
+                        <div class="column2" style="text-align: center;">
+                            <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        </div>
                     </div>
-                    <br>
-                    <div>
-                        <label for="month">Select Month</label>
-                        <select name="month" id="month">
-                            <option value="Jan">Jan</option>
-                            <option value="Feb">Feb</option>
-                            <option value="Mar">Mar</option>
-                            <option value="Apr">Apr</option>
-                            <option value="May">May</option>
-                            <option value="Jun">Jun</option>
-                            <option value="Jul">Jul</option>
-                            <option value="Aug">Aug</option>
-                            <option value="Sep">Sep</option>
-                            <option value="Oct">Oct</option>
-                            <option value="Nov">Nov</option>
-                            <option value="Dec">Dec</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="row">
-                    <div>
-                        <button type="submit" id="create">Create</button>
-                    </div>
-                    </div>
-                    <br>
                 </form>
-                <div class="row">
-                    <div>
-                        <hr>
-                        <br>
-                        <input type="button" value="Cancel" onclick="window.location.href='/'">
-                    </div>
-                </div>
             </div>
         </div>
     </div>

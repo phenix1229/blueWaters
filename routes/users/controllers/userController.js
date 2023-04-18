@@ -244,6 +244,9 @@ module.exports = {
     //create monthly summary
     createMonthlySummary: (req, res, next) => {
         const {year, month} = req.body;
+        if(year.length < 4 || year.length > 4 || Number(year) === NaN){
+            res.render('users/createMonthlySummary', {error:"Please enter four digit year."})
+        }
         let bFees = 0;
         let rFees = 0;
         let psFees = 0;
@@ -315,6 +318,9 @@ module.exports = {
     //create monthly member sales summary
     createMonthlyMemberSales: async (req, res, next) => {
         const {year, month} = req.body;
+        if(year.length < 4 || year.length > 4 || Number(year) === NaN){
+            res.render('users/createMonthlyMemberSales', {error:"Please enter four digit year."})
+        }
         const salesList = [[],[]];
         let memTotal = 0;
         const members = await Member.find()
