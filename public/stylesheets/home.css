@@ -11,6 +11,10 @@
     grid-template-rows: 1fr 9fr;
 }
 
+h2 {
+    font-size: xx-large;
+}
+
 #header {
     grid-row: 1/2;
     display: grid;

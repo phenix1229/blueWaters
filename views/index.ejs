@@ -11,15 +11,12 @@
     <div id="app">
         <%- include('partials/header',{nav:"none", title:"Blue Waters Country Club", menu:"none"}) %>
         <div id="main">
+            <div class="row">
+            </div>
             <div id="options">
                 <a href="/api/users/members">
                     <div id="members" class="option">
                     <h2>Members</h2>
-                    </div>
-                </a>
-                <a href="/api/users/transactions">
-                    <div id="transactions" class="option">
-                        <h2>Transactions</h2>
                     </div>
                 </a>
                 <a href="/api/users/memberFees">
@@ -27,9 +24,19 @@
                         <h2>Member Fees</h2>
                     </div>
                 </a>
+                <a href="/api/users/transactions">
+                    <div id="transactions" class="option">
+                        <h2>Transactions</h2>
+                    </div>
+                </a>
                 <a href="/api/users/reports">
                     <div id="reports" class="option">
                         <h2>Reports</h2>
+                    </div>
+                </a>
+                <a href="/api/users/memberInvoices">
+                    <div id="invoices" class="option">
+                        <h2>Invoices</h2>
                     </div>
                 </a>
             </div>
