@@ -41,10 +41,13 @@ module.exports = {
     //register new member
     saveMember: async (req, res, next) => {
         const { typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus } = req.body;
+        if(typeID.trim() === "" || lastName.trim() === "" || firstName.trim() === "" || address.trim() === "" || city.trim() === "" || state.trim() === "" || zipCode.trim() === "" || phoneNumber.trim() === "" || cellNumber.trim() === "" || email.trim() === "" || membershipType.trim() === "" || membershipStatus.trim() === ""){
+            res.render('users/createMember', {member:req.body, error:"Please complete all fields"})
+        }
         const exists = await Member.findOne({ email });
             if(exists){
                 return res.render('users/createMember', {member:req.body, error:'Member using this email exists'});
-            } 
+            }
             else {
                 const newMember = new Member();
                 newMember.typeID = typeID;
