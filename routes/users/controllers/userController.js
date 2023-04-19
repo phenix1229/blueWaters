@@ -410,9 +410,4 @@ module.exports = {
         return res.render('users/monthlyMemberSales', {month:"",year:"",salesList:[], error:null});
     },
 
-    //render login error page
-    loginError: (req, res) => {
-        res.render('users/login', {error: 'Please check that you are registered and are using the correct email address and password.'})
-    },
-
 }
