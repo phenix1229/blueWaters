@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/stylesheets/login-register.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
-    <title>MemberInvoices</title>
+    <title>Create Invoice</title>
 </head>
 <body>
     <div id="app">
@@ -17,50 +17,50 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/createInvoice">
-                    <h2>Create Invoice For Member</h2>
+                    <h2 style="text-align: center;">Create Invoice For Member</h2>
                     <br>
-                    <div>
-                        <input type="text" name="memberEmail" id="memberEmail" placeholder=" Enter Member Email">
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="memberEmail">Enter Member Email</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="memberEmail" id="memberEmail">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="year">Enter Invoice Year</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="year" id="year">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="month">Select Invoice Month</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <select name="month" id="month">
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Dec">Dec</option>
+                            </select>
+                        </div>
+                        <div class="column1" style="text-align: center;">
+                            <button type="submit" id="Search">Create</button>
+                        </div>
+                        <div class="column2" style="text-align: center;">
+                            <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        </div>
+                    </form>
                     </div>
-                    <br>
-                    <div>
-                        <input type="text" name="year" id="year" placeholder=" Enter Invoice Year">
-                    </div>
-                    <br>
-                    <div>
-                        <select name="month" id="month">
-                            <option value="Jan">Jan</option>
-                            <option value="Feb">Feb</option>
-                            <option value="Mar">Mar</option>
-                            <option value="Apr">Apr</option>
-                            <option value="May">May</option>
-                            <option value="Jun">Jun</option>
-                            <option value="Jul">Jul</option>
-                            <option value="Aug">Aug</option>
-                            <option value="Sep">Sep</option>
-                            <option value="Oct">Oct</option>
-                            <option value="Nov">Nov</option>
-                            <option value="Dec">Dec</option>
-                        </select>
-                        <!-- <input type="text" name="memberEmail" id="memberEmail" placeholder=" Enter Member Email"> -->
-                    </div>
-                    <br>
-                    <div class="row">
-                    <div>
-                        <button type="submit" id="Search">Create</button>
-                    </div>
-                    </div>
-                    <br>
-                </form>
-                <div class="row">
-                    <div>
-                        <hr>
-                        <br>
-                        <input type="button" value="Cancel" onclick="window.location.href='/'">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
