@@ -9,7 +9,7 @@
     <title>Member Fees</title>
 </head>
 <body>
-    <div id="app">
+     <div id="app">
         <%- include('../partials/header',{nav:"nav", title:"Member Fees", menu:"menu"}) %>
         <div id="main">
             <div id="errorField">
@@ -17,34 +17,40 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/findMemberFee">
-                    <h2>Search For Fee</h2>
+                    <h2 style="text-align: center;">Search For Fee</h2>
                     <br>
-                    <div>
-                        <input type="text" name="feeType" id="feeType" placeholder=" Enter Fee Type">
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="year">Enter Fee Type</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <select name="feeType" id="feeType">
+                                <% if(feeTypes){ %>
+                                    <% feeTypes.forEach(fee => { %>
+                                        <option value="<%= fee.membershipType %>"><%= fee.membershipType %></option>
+                                    <% }) %>
+                                <% } %>
+                            </select>
+                        </div>
                     </div>
                     <br>
-                    <div class="row">
-                    <div>
-                        <button type="submit" id="Search">Search</button>
+                    <div  style="text-align: center;">
+                        <button type="submit" id="search">Search</button>
                     </div>
-                    </div>
-                    <br>
                 </form>
-                <div class="row">
-                    <div>
-                        <hr>
-                        <br>
-                        <form role="form" method="POST" action="/api/users/newMemberFee">
-                            <input type="text" value="" id="blankMember" style="display: none;">
-                            <button type="submit" id="newMemButton">New Fee</button>
-                        </form>
+            </div>
+            <br>
+            <div class="createNewMemberForm">
+                <form role="form" method="POST" action="/api/users/newMemberFee">
+                    <div style="text-align: center;">
+                        <button type="submit" id="newFee">New Fee</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    <script src="/javascripts/main.js"></script>
 </body>
+<script src="/javascripts/main.js"></script>
 </html>

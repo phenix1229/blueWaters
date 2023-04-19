@@ -345,8 +345,9 @@ module.exports = {
     },
     
     //render member fees page
-    memberFeesPage: (req, res) => {
-        return res.render('users/memberFees', { error:null});
+    memberFeesPage: async (req, res) => {
+        const feeTypes = await MemberFee.find();
+        return res.render('users/memberFees', {feeTypes, error:null});
     },
     
     //render transactions page

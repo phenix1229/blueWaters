@@ -144,7 +144,7 @@ input, button {
     grid-column: 2/3;
     text-align: right;
     margin-top: 15px;
-    background-color: #00addc;
+    /* background-color: #00addc; */
 }
 
 .dailySumColumn1 {
@@ -161,7 +161,7 @@ input, button {
     background-color: #00addc;
 }
 
-#day, #month {
+#day, #month, #feeType {
     width: 100%;
     text-align: center;
 }
