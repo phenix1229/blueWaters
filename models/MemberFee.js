@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const MemberFeeSchema = mongoose.Schema({
+    typeID: {
+        type: Number,
+        required: true
+    },
+    
     membershipType: {
         type: String,
         required: true

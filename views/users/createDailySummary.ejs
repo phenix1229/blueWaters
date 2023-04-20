@@ -17,19 +17,21 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/createDailySummary">
                     <h2 style="text-align: center;">Enter Date</h2>
                     <br>
-                    <div>
-                        <input type="text" name="year" id="year" placeholder=" Enter Summary Year">
-                    </div>
-                    <br>
                     <div class="columns">
-                        <div class="dailySumColumn1">
+                        <div class="membersColumn1">
+                            <label for="year">Enter Year</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="year" id="year">
+                        </div>
+                        <div class="membersColumn1">
                             <label for="month">Select Month</label>
                         </div>
-                        <div class="dailySumColumn2">
+                        <div class="membersColumn2">
                             <select name="month" id="month">
                                 <option value="Jan">Jan</option>
                                 <option value="Feb">Feb</option>
@@ -46,10 +48,10 @@
                             </select>
                         </div>
                         <br>
-                        <div class="dailySumColumn1">
+                        <div class="membersColumn1">
                             <label for="day">Select Day</label>
                         </div>
-                        <div class="dailySumColumn2">
+                        <div class="membersColumn2">
                             <select name="day" id="day">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -83,14 +85,10 @@
                                 <option value="31">31</option>
                             </select>
                         </div>
-                        <div class="column1"></div>
-                        <div class="column2"></div>
-                        <div class="column1"></div>
-                        <div class="column2"></div>
-                        <div class="column1">
+                        <div class="column1" style="text-align: center;">
                             <button type="submit" id="create">Create</button>
                         </div>
-                        <div class="column2">
+                        <div class="column2" style="text-align: center;">
                             <input type="button" value="Cancel" onclick="window.location.href='/'">
                         </div>
                     </div>

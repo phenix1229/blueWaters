@@ -26,7 +26,13 @@
                             <label for="typeID">Type ID</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="typeID" id="typeID" value="<%= member.typeID %>">
+                            <select name="typeID" id="typeID">
+                            <% if(memberFees !== []){ %>
+                                <% for(i = 0; i < memberFees.length; i++){ %>
+                                    <option value="<%= memberFees[i].typeID %>"><%= memberFees[i].typeID %> (<%= memberFees[i].membershipType %>)</option>
+                                <% } %>
+                            <% } %>
+                            </select>
                         </div>
                         <div class="membersColumn1">
                             <label for="lastName">Last Name</label>
@@ -56,25 +62,25 @@
                             <label for="state">State</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="state" id="state" value="<%= member.state %>">
+                            <input type="text" name="state" id="state" value="<%= member.state %>" minlength="2" maxlength="2">
                         </div>
                         <div class="membersColumn1">
                             <label for="zipCode">Zip Code</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="zipCode" id="zipCode" value="<%= member.zipCode %>">
+                            <input type="text" name="zipCode" id="zipCode" value="<%= member.zipCode %>" minlength="5" maxlength="5">
                         </div>
                         <div class="membersColumn1">
                             <label for="phoneNumber">Phone Number</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="phoneNumber" id="phoneNumber" value="<%= member.phoneNumber %>">
+                            <input type="text" name="phoneNumber" id="phoneNumber" value="<%= member.phoneNumber %>" minlength="10" maxlength="10">
                         </div>
                         <div class="membersColumn1">
                             <label for="cellNumber">Cell Number</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="cellNumber" id="cellNumber" value="<%= member.cellNumber %>">
+                            <input type="text" name="cellNumber" id="cellNumber" value="<%= member.cellNumber %>" minlength="10" maxlength="10">
                         </div>
                         <div class="membersColumn1">
                             <label for="email">Email</label>
@@ -86,13 +92,22 @@
                             <label for="membershipType">Membership Type</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="membershipType" id="membershipType" value="<%= member.membershipType %>">
+                            <select name="membershipType" id="membershipType">
+                                <% if(memberFees !== []){ %>
+                                    <% for(i = 0; i < memberFees.length; i++){ %>
+                                        <option value="<%= memberFees[i].membershipType %>"><%= memberFees[i].membershipType %> (<%= memberFees[i].typeID %>)</option>
+                                    <% } %>
+                                <% } %>
+                            </select>
                         </div>
                         <div class="membersColumn1">
                             <label for="membershipStatus">Membership Status</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="membershipStatus" id="membershipStatus" value="<%= member.membershipStatus %>">
+                            <select name="membershipStatus" id="membershipStatus">
+                                <option value="ACTIVE">Active</option>
+                                <option value="WAITING">Waiting</option>
+                            </select>
                         </div>
                         <div class="column1" style="text-align: center;">
                             <input type="submit" value="Save">

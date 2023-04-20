@@ -6,7 +6,8 @@ const { validationResult } = require('express-validator');
 
 module.exports = {
     //create new member
-    newMember: (req, res) => {
+    newMember: async (req, res) => {
+        const memberFees = await MemberFee.find();
         const member = {
             typeID: null,
             lastName:"",
@@ -21,7 +22,7 @@ module.exports = {
             membershipType:"",
             membershipStatus:""
         }
-        return res.render('users/createMember', {member, error:null})
+        return res.render('users/createMember', {member, memberFees:memberFees, error:null})
     },
 
     //find member
@@ -42,7 +43,8 @@ module.exports = {
     saveMember: async (req, res, next) => {
         const { typeID, lastName, firstName, address, city, state, zipCode, phoneNumber, cellNumber, email, membershipType, membershipStatus } = req.body;
         if(typeID.trim() === "" || lastName.trim() === "" || firstName.trim() === "" || address.trim() === "" || city.trim() === "" || state.trim() === "" || zipCode.trim() === "" || phoneNumber.trim() === "" || cellNumber.trim() === "" || email.trim() === "" || membershipType.trim() === "" || membershipStatus.trim() === ""){
-            res.render('users/createMember', {member:req.body, error:"Please complete all fields"})
+            const memberFees = await MemberFee.find();
+            return res.render('users/createMember', {member:req.body, memberFees, error:"Please complete all fields"})
         }
         const exists = await Member.findOne({ email });
             if(exists){
@@ -51,15 +53,15 @@ module.exports = {
             else {
                 const newMember = new Member();
                 newMember.typeID = typeID;
-                newMember.lastName = lastName;
-                newMember.firstName = firstName;
-                newMember.address = address;
-                newMember.city = city;
-                newMember.state = state;
+                newMember.lastName = lastName.toUpperCase();
+                newMember.firstName = firstName.toUpperCase();
+                newMember.address = address.toUpperCase();
+                newMember.city = city.toUpperCase();
+                newMember.state = state.toUpperCase();
                 newMember.zipCode = zipCode;
                 newMember.phoneNumber = phoneNumber;
                 newMember.cellNumber = cellNumber;
-                newMember.email = email;
+                newMember.email = email.toUpperCase();
                 newMember.membershipType = membershipType;
                 newMember.membershipStatus = membershipStatus;
                 newMember.save().then(() => {
@@ -77,15 +79,15 @@ module.exports = {
         Member.findById({_id:memberID})
         .then(member => {
             if(req.body.typeID !== '') member.typeID = typeID;
-            if(req.body.lastName !== '') member.lastName = lastName;
-            if(req.body.firstName !== '') member.firstName = firstName;
-            if(req.body.address !== '') member.address = address;
-            if(req.body.city !== '') member.city = city; 
-            if(req.body.state !== '') member.state = state;
+            if(req.body.lastName !== '') member.lastName = lastName.toUpperCase();
+            if(req.body.firstName !== '') member.firstName = firstName.toUpperCase();
+            if(req.body.address !== '') member.address = address.toUpperCase();
+            if(req.body.city !== '') member.city = city.toUpperCase(); 
+            if(req.body.state !== '') member.state = state.toUpperCase();
             if(req.body.zipCode !== '') member.zipCode = zipCode;
             if(req.body.phoneNumber !== '') member.phoneNumber = phoneNumber;
             if(req.body.cellNumber !== '') member.cellNumber = cellNumber;
-            if(req.body.email !== '') member.email = email;
+            if(req.body.email !== '') member.email = email.toUpperCase();
             if(req.body.membershipType !== '') member.membershipType = membershipType;
             if(req.body.membershipStatus !== '') member.membershipStatus = membershipStatus;
             member.save();
@@ -105,7 +107,7 @@ module.exports = {
             newTransaction.memberID = member._id;
             newTransaction.date = date;
             newTransaction.location = location;
-            newTransaction.description = description;
+            newTransaction.description = description.toUpperCase();
             newTransaction.amount = amount;
             newTransaction.save().then(() => {
                 return res.redirect('/')
@@ -120,26 +122,31 @@ module.exports = {
     },
     
     //new member fee
-    newMemberFee: (req,res) => {
+    newMemberFee: async (req,res) => {
+        const existingFees = await MemberFee.find();
+        const nextNum = existingFees.sort((a, b) => a.typeID - b.typeID)[existingFees.length - 1].typeID + 1;
         const fee = {
             typeID:"",
             membershipType:"",
             monthlyFee:"",
             minMonthlyCharge:""
         }
-        res.render('users/newMemberFee', {fee, error:null});
+        res.render('users/newMemberFee', {fee, nextNum, error:null});
     },
 
     //save new member fee
     saveMemberFee: (req, res, next) => {
     const { typeID, membershipType, monthlyFee, minMonthlyCharge } = req.body;
+    if(typeID.trim() === "" || membershipType.trim() === "" || monthlyFee.trim() === "" || minMonthlyCharge.trim() === ""){
+        return res.render('users/newMemberFee', {fee:req.body, error:"Please complete all fields"})
+    }
     MemberFee.findOne({ membershipType }).then(memberFee => {
         if(memberFee){
             res.render('users/newMemberFee', {fee, error:'Fee of this type exists'})
         } else {}
             const newMemberFee = new MemberFee();
             newMemberFee.typeID = typeID;
-            newMemberFee.membershipType = membershipType;
+            newMemberFee.membershipType = membershipType.toUpperCase();
             newMemberFee.monthlyFee = monthlyFee;
             newMemberFee.minMonthlyCharge = minMonthlyCharge;
             newMemberFee.save().then(() => {
@@ -171,7 +178,7 @@ module.exports = {
         MemberFee.findById({_id:ID})
         .then(fee => {
             if(req.body.typeID !== '') fee.typeID = typeID;
-            if(req.body.membershipType !== '') fee.membershipType = membershipType;
+            if(req.body.membershipType !== '') fee.membershipType = membershipType.toUpperCase();
             if(req.body.monthlyFee !== '') fee.monthlyFee = monthlyFee;
             if(req.body.minMonthlyCharge !== '') fee.minMonthlyCharge = minMonthlyCharge;
             fee.save().then(() => {
@@ -186,6 +193,9 @@ module.exports = {
     //create invoice
     createInvoice: (req, res, next) => {
         const {memberEmail, year, month} = req.body;
+        if(year.length < 4 || year.length > 4 || Number(year) === NaN){
+            return res.render('users/memberInvoices', {error:"Please enter 4 digit year."})
+        }
         let currentMember = {};
         const transArray = [];
         let bFees = 0;

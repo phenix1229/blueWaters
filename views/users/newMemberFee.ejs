@@ -17,33 +17,41 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/saveMemberFee">
-                    <h2>New Fee</h2>
+                    <h2 style="text-align: center;">New Fee</h2>
                     <br>
-                    <div>
-                        <input type="text" name="typeID" id="typeID" value="<%= fee.typeID %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="membershipType" id="membershipType" value="<%= fee.membershipType %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="monthlyFee" id="monthlyFee" value="<%= fee.monthlyFee %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="minMonthlyCharge" id="minMonthlyCharge" value="<%= fee.minMonthlyCharge %>">
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="row">
-                    <div>
-                        <input type="submit" value="Save">
-                        <input type="button" value="Cancel" onclick="window.location.href='/'">
-                    </div>
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="typeID">Type ID</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="typeID" id="typeID" value="<%= nextNum %>" minlength="1" maxlength="2">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="membershipType">Membership Type</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="membershipType" id="membershipType" value="<%= fee.membershipType %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="monthlyFee">Monthly Fee</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="monthlyFee" id="monthlyFee" value="<%= fee.monthlyFee %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="minMonthlyCharge">Minimum Monthly Charge</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="minMonthlyCharge" id="minMonthlyCharge" value="<%= fee.minMonthlyCharge %>">
+                        </div>
+                        <div class="column1" style="text-align: center;">
+                            <input type="submit" value="Save">
+                        </div>
+                        <div class="column2" style="text-align: center;">
+                            <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        </div>
                     </div>
                 </form>
             </div>
