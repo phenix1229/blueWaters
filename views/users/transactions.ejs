@@ -17,43 +17,52 @@
                     <p style="color:red; font-size: 20px;"><%= error %> </p>
                 <% } %>
             </div>
-            <div id="form">
+            <div id="createNewMemberForm">
                 <form role="form" method="POST" action="/api/users/saveTransaction">
-                    <h2>New Transaction</h2>
+                    <h2 style="text-align: center;">New Transaction</h2>
                     <br>
-                    <div>
-                        <input type="text" name="memberID" id="memberID" value="<%= transaction.memberID %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="date" id="date" value="<%= transaction.date %>">
-                    </div>
-                    <br>
-                    <div>
-                        <select name="location" id="location">
-                            <option value=""></option>
-                            <option value="bar">Bar</option>
-                            <option value="proShop">Pro Shop</option>
-                            <option value="restaurant">Restaurant</option>
-                            <option value="tennis/golf lessons">Tennis/golf lessons</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="description" id="description" value="<%= transaction.description %>">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="text" name="amount" id="amount" value="<%= transaction.amount %>">
-                    </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="row">
-                    <div>
-                        <input type="submit" value="Save">
-                        <input type="button" value="Cancel" onclick="window.location.href='/'">
-                    </div>
+                    <div class="columns">
+                        <div class="membersColumn1">
+                            <label for="memberID">Enter Member Email</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="email" name="memberID" id="memberID" value="<%= transaction.memberID %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="date">Date</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="date" id="date" value="<%= transaction.date %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="location">Location</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <select name="location" id="location">
+                                <option value="bar">Bar</option>
+                                <option value="proShop">Pro Shop</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="tennis/golf lessons">Tennis/golf lessons</option>
+                            </select>
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="description" id="description" value="<%= transaction.description %>">
+                        </div>
+                        <div class="membersColumn1">
+                            <label for="amount">Enter Amount</label>
+                        </div>
+                        <div class="membersColumn2">
+                            <input type="text" name="amount" id="amount" value="<%= transaction.amount %>">
+                        </div>
+                        <div class="column1" style="text-align: center;">
+                            <input type="submit" value="Save">
+                        </div>
+                        <div class="column2" style="text-align: center;">
+                            <input type="button" value="Cancel" onclick="window.location.href='/'">
+                        </div>
                     </div>
                 </form>
             </div>
