@@ -70,6 +70,9 @@ router.get('/createDailySummary', userController.createDailySummaryPage)
 //create monthly summary
 router.post('/createDailySummary', userController.createDailySummary)
 
+//select report
+router.post('/selectReport', userController.selectReport);
+
 //render monthly member sales
 router.get('/monthlyMemberSales', userController.monthlyMemberSalesPage);
 

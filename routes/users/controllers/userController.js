@@ -190,6 +190,13 @@ module.exports = {
         });
     },
 
+    //select report
+    selectReport: (req, res) => {
+        const { reportType } = req.body;
+        console.log(reportType);
+        return res.render(reportType, {error:null});
+    },
+
     //create invoice
     createInvoice: (req, res, next) => {
         const {memberEmail, year, month} = req.body;
