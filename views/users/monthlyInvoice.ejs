@@ -21,12 +21,12 @@
                     <br>
                     <%= member.city %>, <%= member.state %> <%= member.zipCode %>
                 </div>
-                <div id="cAmount" class="amount">Membership: <%= member.membershipType %></div>
+                <div id="cAmount" class="amount">MEMBERSHIP: <%= member.membershipType %></div>
             </div>
         </div>
         <div id="main">
             <div id="tableDiv">
-                <p style="text-align: left;text-decoration: underline;font-size: x-large;">Monthly Charges:</p>
+                <p style="text-align: left;text-decoration: underline;font-size: x-large;">MONTHLY CHARGES:</p>
                 <table id="table">
                     <tr style="text-align: left; text-decoration: underline;">
                         <th id="actionDate">DATE</th>
@@ -37,7 +37,7 @@
                     <% sortedTransactions = transArray.sort((a,b) => {let transA = a.date; let transB = b.date; transB - transA}); %> 
                     <% for(i = sortedTransactions.length - 1; i >= 0; i--){ %>
                         <tr>
-                        <td id="actionDate"><%= String(sortedTransactions[i].date).slice(4, 15) %></td>
+                        <td id="actionDate"><%= String(sortedTransactions[i].date).toUpperCase().slice(4, 15) %></td>
                         <td id="actionDesc"><%= sortedTransactions[i].location %></td>
                         <td id="newBalance"></td>
                         <td id="actionAmount">$<%= sortedTransactions[i].amount %>.00</td>
@@ -46,18 +46,18 @@
                     <tr>
                         <td id="actionDate"></td>
                         <td id="actionDesc"></td>
-                        <td id="newBalance" style="text-align: right;">Subtotal</td>
+                        <td id="newBalance" style="text-align: right;">SUBTOTAL</td>
                         <td id="actionAmount">$<%= subtotal %>.00</td>
                     </tr>
                 <br> 
                 <br>
                 <% if(feeMet === true){ %>
-                    <h4>Minimum Monthly Charge Met.</h4>
+                    <h4>MINIMUM MONTHLY CHARGE MET.</h4>
                     <br>
                     <br>
                     <br>
                         <tr>
-                            <td id="actionDate">Membership Fee</td>
+                            <td id="actionDate">MEMBERSHIP FEE</td>
                             <td id="actionDesc"></td>
                             <td id="newBalance"></td>
                             <td id="actionAmount">$<%= monthlyFee %>.00</td>
@@ -65,13 +65,13 @@
                         <tr>
                             <td id="actionDate"></td>
                             <td id="actionDesc"></td>
-                            <td id="newBalance" style="text-align: right;">Total</td>
+                            <td id="newBalance" style="text-align: right;">TOTAL</td>
                             <td id="actionAmount">$<%= totalFees %>.00</td>
                         </tr>
                     </table>
                 <% } else { %>
                     <tr>
-                        <td id="actionDate" style="color: red;">Minimum Monthly Charge Not Met.</td>
+                        <td id="actionDate" style="color: red;">MINIMUM MONTHLY CHARGE NOT MET.</td>
                         <td id="actionDesc"></td>
                         <td id="newBalance"></td>
                         <td id="actionAmount"></td>
@@ -82,13 +82,13 @@
                         <td id="actionAmount"></td>
                     </tr>
                     <tr>
-                        <td id="actionDate">Membership Fee</td>
+                        <td id="actionDate">MEMBERSHIP FEE</td>
                         <td id="actionDesc"></td>
                         <td id="newBalance"></td>
                         <td id="actionAmount">$<%= monthlyFee %>.00</td>
                     </tr>
                     <tr>
-                        <td id="actionDate">Minimum Monthly Charge</td>
+                        <td id="actionDate">MINIMUM MONTHLY CHARGE</td>
                         <td id="actionDesc"></td>
                         <td id="newBalance"></td>
                         <td id="actionAmount">$<%= minMonthlyCharge %>.00</td>
@@ -96,7 +96,7 @@
                     <tr>
                         <td id="actionDate"></td>
                         <td id="actionDesc"></td>
-                        <td id="newBalance" style="text-align: right;">Total</td>
+                        <td id="newBalance" style="text-align: right;">TOTAL</td>
                         <td id="actionAmount">$<%= totalFees %>.00</td>
                     </tr>
                 </table>
