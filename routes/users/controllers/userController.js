@@ -32,7 +32,7 @@ module.exports = {
             if(member){
                 return res.render('users/updateMember', {member, error:null})
             } else {
-                return res.render('users/members', {error:"No user with this email found"})
+                return res.render('users/members', {error:"No member with this email found"})
             }
         }).catch(err => {
             next (err);
@@ -98,6 +98,34 @@ module.exports = {
         });
     },
 
+    //find transactions
+    findTransactions: (req, res) => {
+        const {memberEmail, month, year} = req.body;
+        Member.findOne({email:memberEmail}).then(member => {
+            if(year.trim() === "" || year.trim().length < 4 || year.trim().length > 4 || Number(year.trim()) === NaN){
+                return res.render('users/transactions', {error:"Please enter 4 digit year."});
+            }
+            if(member){
+                Transaction.find({memberID:member._id}).then(transactions => {
+                    const transList = [];
+                    transactions.forEach(item => {
+                        const tDate = String(item.date);
+                        if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
+                                transList.push(item);
+                        }
+                    });
+                    if(transList.length > 0){
+                        return res.render('users/memberTransactions', {member, month, year, transList, error:null});
+                    } else {
+                        return res.render('users/memberTransactions', {member, month, year, transList, error:"No transactions found."});
+                    }
+                })
+            }
+        }).catch(err => {
+            next (err);
+        });
+    },
+
     //save transaction
     saveTransaction: (req, res, next) => {
     const { memberID, date, location, description, amount } = req.body;
@@ -113,7 +141,7 @@ module.exports = {
                 return res.redirect('/')
             })
             } else {
-                return res.render('users/transactions', {transaction:req.body, error:'Member does not exist'})
+                return res.render('users/newTransaction', {transaction:req.body, error:'Member does not exist'})
             }
         })
         .catch(err => {
@@ -369,9 +397,20 @@ module.exports = {
         const feeTypes = await MemberFee.find();
         return res.render('users/memberFees', {feeTypes, error:null});
     },
-    
+
     //render transactions page
     transactionsPage: (req, res) => {
+        return res.render('users/transactions', { error:null});
+    },
+
+    //render member transaction list page
+    memberTransactionsPage: (req, res) => {
+        const { member, month, year, transList } = req.body
+        return res.render('users/memberTransactions', {member, month, year, transList, error:null})
+    },
+    
+    //render new transaction page
+    newTransactionPage: (req, res) => {
         const today = () =>{
             return `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`;
         };
@@ -382,7 +421,7 @@ module.exports = {
             description:"",
             amount:""
         }
-        return res.render('users/transactions', { transaction, error:null});
+        return res.render('users/newTransaction', { transaction, error:null});
     },
 
     //render reports page

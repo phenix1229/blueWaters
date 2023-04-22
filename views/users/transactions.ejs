@@ -18,51 +18,53 @@
                 <% } %>
             </div>
             <div id="createNewMemberForm">
-                <form role="form" method="POST" action="/api/users/saveTransaction">
-                    <h2 style="text-align: center;">New Transaction</h2>
+                <form role="form" method="POST" action="/api/users/findTransactions">
+                    <h2 style="text-align: center;">Search For Transactions</h2>
                     <br>
                     <div class="columns">
                         <div class="membersColumn1">
-                            <label for="memberID">Enter Member Email</label>
+                            <label for="memberEmail">Enter Member Email</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="email" name="memberID" id="memberID" value="<%= transaction.memberID %>">
+                            <input type="email" name="memberEmail" id="memberEmail">
                         </div>
                         <div class="membersColumn1">
-                            <label for="date">Date</label>
+                            <label for="year">Year</label>
                         </div>
                         <div class="membersColumn2">
-                            <input type="text" name="date" id="date" value="<%= transaction.date %>">
+                            <input type="text" name="year" id="year">
                         </div>
                         <div class="membersColumn1">
-                            <label for="location">Location</label>
+                            <label for="month">Select Month</label>
                         </div>
                         <div class="membersColumn2">
-                            <select name="location" id="location">
-                                <option value="bar">Bar</option>
-                                <option value="proShop">Pro Shop</option>
-                                <option value="restaurant">Restaurant</option>
-                                <option value="tennis/golf lessons">Tennis/golf lessons</option>
+                            <select name="month" id="month">
+                                <option value="Jan">Jan</option>
+                                <option value="Feb">Feb</option>
+                                <option value="Mar">Mar</option>
+                                <option value="Apr">Apr</option>
+                                <option value="May">May</option>
+                                <option value="Jun">Jun</option>
+                                <option value="Jul">Jul</option>
+                                <option value="Aug">Aug</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Nov">Nov</option>
+                                <option value="Dec">Dec</option>
                             </select>
                         </div>
-                        <div class="membersColumn1">
-                            <label for="description">Description</label>
-                        </div>
-                        <div class="membersColumn2">
-                            <input type="text" name="description" id="description" value="<%= transaction.description %>">
-                        </div>
-                        <div class="membersColumn1">
-                            <label for="amount">Enter Amount</label>
-                        </div>
-                        <div class="membersColumn2">
-                            <input type="text" name="amount" id="amount" value="<%= transaction.amount %>">
-                        </div>
-                        <div class="column1" style="text-align: center;">
-                            <input type="submit" value="Save">
-                        </div>
-                        <div class="column2" style="text-align: center;">
-                            <input type="button" value="Cancel" onclick="window.location.href='/'">
-                        </div>
+                    </div>
+                    <br>
+                    <div style="text-align: center;">
+                        <button type="submit" id="search">Search</button>
+                    </div>
+                </form>
+            </div>
+            <br>
+            <div class="createNewMemberForm">
+                <form role="form" method="POST" action="/api/users/newTransaction">
+                    <div style="text-align: center;">
+                        <button type="submit" id="newFee">New Transaction</button>
                     </div>
                 </form>
             </div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/balances.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/history.css" type="text/css">
+    <title>Member Transactions</title>
+</head>
+<body>
+    <div id="app">
+        <%- include('../partials/header',{nav:"nav", title:"Member Transactions", menu:"menu"}) %>
+        <div id="balances">
+            <div id="checkingBal">
+                <div id="cBalance" class="balance">
+                    <%= member.lastName %>, <%= member.firstName %>
+                    <br>
+                    <%= member.address %>
+                    <br>
+                    <%= member.city %>, <%= member.state %> <%= member.zipCode %>
+                </div>
+                <div id="cAmount" class="amount">MEMBERSHIP: <%= member.membershipType %></div>
+            </div>
+        </div>
+        <div id="main">
+                <div id="tableDiv">
+                    <p style="text-align: left;text-decoration: underline;font-size: x-large;">TRANSACTIONS FOR: <%= `${month.toUpperCase()}` %>, <%= year %></p>
+                    <form role="form" method="POST" action="/api/users/updateTransaction">
+                        <table id="table">
+                            <tr style="text-align: left; text-decoration: underline;">
+                                <th id="selected"></th>
+                                <th id="actionID">TRANSACTION ID</th>
+                                <th id="actionDate">DATE</th>
+                                <th id="actionArea">AREA</th>
+                                <th id="actionDesc">DESCRIPTION</th>
+                                <th id="actionAmount">AMOUNT</th>
+                            </tr>
+                            <% sortedTransactions = transList.sort((a,b) => {let transA = a.date; let transB = b.date; transB - transA}); %> 
+                            <% for(i = sortedTransactions.length - 1; i >= 0; i--){ %>
+                                <tr>
+                                    <td><input type="radio" name="transID" value="<%= sortedTransactions[i]._id %>" id="<%= sortedTransactions[i]._id %>"></td>
+                                    <td id="actionID"><%= sortedTransactions[i]._id %></td>
+                                    <td id="actionDate"><%= String(sortedTransactions[i].date).toUpperCase().slice(4, 15) %></td>
+                                    <td id="actionArea"><%= sortedTransactions[i].location %></td>
+                                    <td id="actionDesc"><%= sortedTransactions[i].description %></td>
+                                    <td id="actionAmount">$<%= sortedTransactions[i].amount %>.00</td>
+                                </tr>
+                            <% } %>
+                        </table>
+                        <% if(transList.length > 0){ %>
+                            <input type="submit" value="Update Transaction">
+                        <% } %>
+                    </form>
+                </div>
+        </div>
+    </div>
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

@@ -19,6 +19,9 @@ router.post('/findMember', userController.findMember);
 //find member fee
 router.post('/findMemberFee', userController.findMemberFee);
 
+//find member transactions
+router.post('/findTransactions', userController.findTransactions);
+
 //save new transaction
 router.post('/saveTransaction', userController.saveTransaction);
 
@@ -36,6 +39,18 @@ router.get('/memberInvoices', userController.memberInvoicesPage);
 
 //render transactions page
 router.get('/transactions', userController.transactionsPage);
+
+//render transactions page
+// router.post('/transactionList', userController.transactionList);
+
+//find member transactions
+router.post('/findTransactions', userController.findTransactions);
+
+//render newTransaction page
+router.post('/newTransaction', userController.newTransactionPage);
+
+//render member transactions page
+router.post('/memberTransactionsPage', userController.memberTransactionsPage);
 
 //render member fees page
 router.get('/memberFees', userController.memberFeesPage);
