@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const MemberSchema = mongoose.Schema({
     typeID: {
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: 'memberFees'
         type: Number,
         required: true
     },

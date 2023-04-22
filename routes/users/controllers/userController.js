@@ -126,6 +126,37 @@ module.exports = {
         });
     },
 
+    findTransaction: (req, res, next) => {
+        const { transID } = req.body;
+        Transaction.findOne({_id:transID}).then(trans => {
+            console.log(`trans from ft = ${trans}`)
+            return res.render('users/updateTransaction', {trans, error:null})
+        }).catch(err => {
+            next (err);
+        });
+    },
+
+    //update transaction
+    updateTransaction: (req, res, next) => {
+        console.log("start of ut")
+        const { _id, memberID, date, location, description, amount } = req.body;
+        Transaction.findById({_id:_id})
+        .then(trans => {
+            console.log(`trans = ${trans}`)
+            if(req.body.memberID !== '') trans.memberID = memberID;
+            if(req.body.date !== '') trans.date = date;
+            if(req.body.location !== '') trans.location = location;
+            if(req.body.description !== '') trans.description = description;
+            if(req.body.amount !== '') trans.amount = amount;
+            trans.save().then(() => {
+                return res.redirect('/');
+            })
+        })
+        .catch(err => {
+            return next(err);
+        });
+    },
+
     //save transaction
     saveTransaction: (req, res, next) => {
     const { memberID, date, location, description, amount } = req.body;
