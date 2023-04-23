@@ -1,7 +1,6 @@
 const Member = require('../../../models/Member');
 const Transaction = require('../../../models/Transaction');
 const MemberFee = require('../../../models/MemberFee');
-const { validationResult } = require('express-validator');
 
 
 module.exports = {
