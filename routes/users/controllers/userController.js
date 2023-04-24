@@ -27,7 +27,7 @@ module.exports = {
     //find member
     findMember: (req, res, next) => {
         const {memberEmail} = req.body;
-        Member.findOne({email:memberEmail}).then(member => {
+        Member.findOne({email:memberEmail.toUpperCase()}).then(member => {
             if(member){
                 return res.render('users/updateMember', {member, error:null})
             } else {
@@ -45,7 +45,7 @@ module.exports = {
             const memberFees = await MemberFee.find();
             return res.render('users/createMember', {member:req.body, memberFees, error:"Please complete all fields"})
         }
-        const exists = await Member.findOne({ email });
+        const exists = await Member.findOne({ email:email.toUpperCase() });
             if(exists){
                 return res.render('users/createMember', {member:req.body, error:'Member using this email exists'});
             }
@@ -100,7 +100,7 @@ module.exports = {
     //find transactions
     findTransactions: (req, res) => {
         const {memberEmail, month, year} = req.body;
-        Member.findOne({email:memberEmail}).then(member => {
+        Member.findOne({email:memberEmail.toUpperCase()}).then(member => {
             if(year.trim() === "" || year.trim().length < 4 || year.trim().length > 4 || Number(year.trim()) === NaN){
                 return res.render('users/transactions', {error:"Please enter 4 digit year."});
             }
@@ -159,7 +159,7 @@ module.exports = {
     //save transaction
     saveTransaction: (req, res, next) => {
     const { memberID, date, location, description, amount } = req.body;
-    Member.findOne({ email:memberID }).then(member => {
+    Member.findOne({ email:memberID.toUpperCase() }).then(member => {
         if(member){
             const newTransaction = new Transaction();
             newTransaction.memberID = member._id;
@@ -198,7 +198,7 @@ module.exports = {
     if(typeID.trim() === "" || membershipType.trim() === "" || monthlyFee.trim() === "" || minMonthlyCharge.trim() === ""){
         return res.render('users/newMemberFee', {fee:req.body, error:"Please complete all fields"})
     }
-    MemberFee.findOne({ membershipType }).then(memberFee => {
+    MemberFee.findOne({ membershipType:membershipType.toUpperCase() }).then(memberFee => {
         if(memberFee){
             res.render('users/newMemberFee', {fee, error:'Fee of this type exists'})
         } else {}
@@ -219,7 +219,7 @@ module.exports = {
     //find member fee
     findMemberFee: (req, res, next) => {
         const {feeType} = req.body;
-        MemberFee.findOne({membershipType:feeType}).then(fee => {
+        MemberFee.findOne({membershipType:feeType.toUpperCase()}).then(fee => {
             if(fee){
                 return res.render('users/updateMemberFees', {fee, error:null})
             } else {
@@ -251,7 +251,6 @@ module.exports = {
     //select report
     selectReport: (req, res) => {
         const { reportType } = req.body;
-        console.log(reportType);
         return res.render(reportType, {error:null});
     },
 
@@ -271,7 +270,7 @@ module.exports = {
         let monthlyFee = 0;
         let minMonthlyCharge = 0;
         let totalFees = 0;
-        Member.findOne({email:memberEmail}).then(member => {
+        Member.findOne({email:memberEmail.toUpperCase()}).then(member => {
             if(member){
                 Transaction.find({memberID:member._id}).then(transactions => {
                     transactions.forEach(item => {
@@ -298,7 +297,7 @@ module.exports = {
                     })
                     return currentMember = member;
                 }).then(currentMember => {
-                    MemberFee.findOne({membershipType:currentMember.membershipType})
+                    MemberFee.findOne({membershipType:currentMember.membershipType.toUpperCase()})
                     .then(feeType => {
                         monthlyFee = feeType.monthlyFee;
                         minMonthlyCharge = feeType.minMonthlyCharge;
@@ -332,22 +331,20 @@ module.exports = {
         Transaction.find().then(trans => {
                 trans.forEach(item => {
                     const tDate = String(item.date);
-                    if(tDate.slice(11,15) === year){
-                        if(tDate.slice(4,7) === month){
-                            switch (item.location){
-                                case "bar":
-                                    bFees += item.amount;
-                                    break;
-                                case "restaurant":
-                                    rFees += item.amount;
-                                    break;
-                                case "proShop":
-                                    psFees += item.amount;
-                                    break;
-                                case "tennis/golf lessons":
-                                    tglFees += item.amount;
-                                    break;
-                            }
+                    if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
+                        switch (item.location){
+                            case "bar":
+                                bFees += item.amount;
+                                break;
+                            case "restaurant":
+                                rFees += item.amount;
+                                break;
+                            case "proShop":
+                                psFees += item.amount;
+                                break;
+                            case "tennis/golf lessons":
+                                tglFees += item.amount;
+                                break;
                         }
                     }
                 })
