@@ -97,6 +97,9 @@ router.get('/monthlyMemberSales', userController.monthlyMemberSalesPage);
 //render create monthly member sales page
 router.get('/createMonthlyMemberSales', userController.createMonthlyMemberSalesPage)
 
+//render success page
+router.get('/successPage', userController.successPage)
+
 //create monthly member sales
 router.post('/createMonthlyMemberSales', userController.createMonthlyMemberSales)
 

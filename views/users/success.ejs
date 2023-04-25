@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/login-register.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
+    <title>Success</title>
+</head>
+<body>
+    <div id="app">
+        <%- include('../partials/header',{nav:"none", title:"Success", menu:"none"}) %>
+        <div id="main">
+            <div id="messageField">
+                <% if (message !== null){ %>
+                    <p style="color:rgb(0, 255, 85); font-size: 30px;"><%= message %> </p>
+                    <% for(let i = 0; i < item.length; i++){ %>
+                        <p><%= item[i] %></p>
+                    <% } %>
+                <% } %>
+            </div>
+            <br>
+            <div style="text-align: center;">
+                <input type="button" value="Close" onclick="window.location.href='/'">
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/main.js"></script>
+</body>
+</html>

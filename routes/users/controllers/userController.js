@@ -63,8 +63,8 @@ module.exports = {
                 newMember.email = email.toUpperCase();
                 newMember.membershipType = membershipType;
                 newMember.membershipStatus = membershipStatus;
-                newMember.save().then(() => {
-                    return res.redirect('/')
+                newMember.save().then((newMember) => {
+                    return res.render('users/success', {message:"Member created.", item:JSON.stringify(newMember).split(",")})
                 })
                 .catch(err => {
                     return next(err);
@@ -89,9 +89,10 @@ module.exports = {
             if(req.body.email !== '') member.email = email.toUpperCase();
             if(req.body.membershipType !== '') member.membershipType = membershipType;
             if(req.body.membershipStatus !== '') member.membershipStatus = membershipStatus;
-            member.save();
-        });
-        return res.redirect('/')
+            member.save().then(member => {
+                return res.render('users/success', {message:"Member updated.", item:JSON.stringify(member).split(",")})
+            })
+        })
         .catch(err => {
             return next(err);
         });
@@ -147,8 +148,8 @@ module.exports = {
             if(req.body.location !== '') trans.location = location;
             if(req.body.description !== '') trans.description = description;
             if(req.body.amount !== '') trans.amount = amount;
-            trans.save().then(() => {
-                return res.redirect('/');
+            trans.save().then((trans) => {
+                return res.render('users/success', {message:"Transaction updated.", item:JSON.stringify(trans).split(",")})
             })
         })
         .catch(err => {
@@ -167,8 +168,8 @@ module.exports = {
             newTransaction.location = location;
             newTransaction.description = description.toUpperCase();
             newTransaction.amount = amount;
-            newTransaction.save().then(() => {
-                return res.redirect('/')
+            newTransaction.save().then((newTransaction) => {
+                return res.render('users/success', {message:"Transaction created.", item:JSON.stringify(newTransaction).split(",")})
             })
             } else {
                 return res.render('users/newTransaction', {transaction:req.body, error:'Member does not exist'})
@@ -207,8 +208,8 @@ module.exports = {
             newMemberFee.membershipType = membershipType.toUpperCase();
             newMemberFee.monthlyFee = monthlyFee;
             newMemberFee.minMonthlyCharge = minMonthlyCharge;
-            newMemberFee.save().then(() => {
-                return res.redirect('/')
+            newMemberFee.save().then((newMemberFee) => {
+                return res.render('users/success', {message:"Member fee created.", item:JSON.stringify(newMemberFee).split(",")})
             })
         })
         .catch(err => {
@@ -239,8 +240,8 @@ module.exports = {
             if(req.body.membershipType !== '') fee.membershipType = membershipType.toUpperCase();
             if(req.body.monthlyFee !== '') fee.monthlyFee = monthlyFee;
             if(req.body.minMonthlyCharge !== '') fee.minMonthlyCharge = minMonthlyCharge;
-            fee.save().then(() => {
-                return res.redirect('/');
+            fee.save().then((fee) => {
+                return res.render('users/success', {message:"Member fee updated.", item:JSON.stringify(fee).split(",")})
             })
         })
         .catch(err => {
@@ -495,5 +496,10 @@ module.exports = {
     monthlyMemberSalesPage: (req, res) => {
         return res.render('users/monthlyMemberSales', {month:"",year:"",salesList:[], error:null});
     },
+
+    //render success page
+    successPage: (req, res) => {
+        return res.render('users/success', {message:null, item:null});
+    }
 
 }
