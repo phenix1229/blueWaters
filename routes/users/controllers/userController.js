@@ -1,6 +1,7 @@
 const Member = require('../../../models/Member');
 const Transaction = require('../../../models/Transaction');
 const MemberFee = require('../../../models/MemberFee');
+const utils = require('../utils/userUtils');
 
 
 module.exports = {
@@ -116,8 +117,8 @@ module.exports = {
                     });
                     if(transList.length > 0){
                         return res.render('users/memberTransactions', {member, month, year, transList, error:null});
-                    } else {
-                        return res.render('users/memberTransactions', {member, month, year, transList, error:"No transactions found."});
+                    } else if(transList.length <= 0){
+                        return res.render('users/transactions', {member, month, year, transList, error:"No transactions found."});
                     }
                 })
             }
@@ -129,7 +130,6 @@ module.exports = {
     findTransaction: (req, res, next) => {
         const { transID } = req.body;
         Transaction.findOne({_id:transID}).then(trans => {
-            console.log(`trans from ft = ${trans}`)
             return res.render('users/updateTransaction', {trans, error:null})
         }).catch(err => {
             next (err);
@@ -138,11 +138,9 @@ module.exports = {
 
     //update transaction
     updateTransaction: (req, res, next) => {
-        console.log("start of ut")
         const { _id, memberID, date, location, description, amount } = req.body;
         Transaction.findById({_id:_id})
         .then(trans => {
-            console.log(`trans = ${trans}`)
             if(req.body.memberID !== '') trans.memberID = memberID;
             if(req.body.date !== '') trans.date = date;
             if(req.body.location !== '') trans.location = location;
@@ -160,6 +158,12 @@ module.exports = {
     //save transaction
     saveTransaction: (req, res, next) => {
     const { memberID, date, location, description, amount } = req.body;
+    if(location.trim() === "" || description.trim() === "" || amount.trim() === ""){
+        return res.render('users/newTransaction', {transaction:req.body, error:"Please complete all fields."})
+    }
+    if(utils.properAmount(amount) === false){
+        return res.render('users/newTransaction', {transaction:req.body, error:"Please enter amount in 2 decimal format (ex. 1.00)."})
+    }
     Member.findOne({ email:memberID.toUpperCase() }).then(member => {
         if(member){
             const newTransaction = new Transaction();
@@ -276,23 +280,21 @@ module.exports = {
                 Transaction.find({memberID:member._id}).then(transactions => {
                     transactions.forEach(item => {
                         const tDate = String(item.date);
-                        if(tDate.slice(11,15) === year){
-                            if(tDate.slice(4,7) === month){
-                                transArray.push(item);
-                                switch (item.location){
-                                    case "bar":
-                                        bFees += item.amount;
-                                        break;
-                                    case "restaurant":
-                                        rFees += item.amount;
-                                        break;
-                                    case "proShop":
-                                        psFees += item.amount;
-                                        break;
-                                    case "tennis/golf lessons":
-                                        tglFees += item.amount;
-                                        break;
-                                }
+                        if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
+                            transArray.push(item);
+                            switch (item.location){
+                                case "BAR":
+                                    bFees += Number(item.amount);
+                                    break;
+                                case "RESTAURANT":
+                                    rFees += Number(item.amount);
+                                    break;
+                                case "PRO SHOP":
+                                    psFees += Number(item.amount);
+                                    break;
+                                case "TENNIS/GOLF LESSONS":
+                                    tglFees += Number(item.amount);
+                                    break;
                             }
                         }
                     })

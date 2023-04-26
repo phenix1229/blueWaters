@@ -40,12 +40,12 @@
                             <% sortedTransactions = transList.sort((a,b) => {let transA = a.date; let transB = b.date; transB - transA}); %> 
                             <% for(i = sortedTransactions.length - 1; i >= 0; i--){ %>
                                 <tr>
-                                    <td><input type="radio" name="transID" value="<%= sortedTransactions[i]._id %>" id="<%= sortedTransactions[i]._id %>"></td>
+                                    <td><input type="radio" name="transID" value="<%= sortedTransactions[i]._id %>" id="<%= sortedTransactions[i]._id %>" required></td>
                                     <td id="actionID"><%= sortedTransactions[i]._id %></td>
                                     <td id="actionDate"><%= String(sortedTransactions[i].date).toUpperCase().slice(4, 15) %></td>
                                     <td id="actionArea"><%= sortedTransactions[i].location %></td>
                                     <td id="actionDesc"><%= sortedTransactions[i].description %></td>
-                                    <td id="actionAmount">$<%= sortedTransactions[i].amount %>.00</td>
+                                    <td id="actionAmount">$<%= sortedTransactions[i].amount %></td>
                                 </tr>
                             <% } %>
                         </table>

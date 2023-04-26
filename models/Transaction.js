@@ -17,7 +17,7 @@ const TransactionSchema = mongoose.Schema({
         required: true
     },
     amount: {
-        type: Number,
+        type: String,
         required: true
     }
 })

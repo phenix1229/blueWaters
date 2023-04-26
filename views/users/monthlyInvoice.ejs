@@ -40,14 +40,14 @@
                         <td id="actionDate"><%= String(sortedTransactions[i].date).toUpperCase().slice(4, 15) %></td>
                         <td id="actionDesc"><%= sortedTransactions[i].location %></td>
                         <td id="newBalance"></td>
-                        <td id="actionAmount">$<%= sortedTransactions[i].amount %>.00</td>
+                        <td id="actionAmount">$<%= sortedTransactions[i].amount %></td>
                         </tr>
                     <% } %>
                     <tr>
                         <td id="actionDate"></td>
                         <td id="actionDesc"></td>
                         <td id="newBalance" style="text-align: right;">SUBTOTAL</td>
-                        <td id="actionAmount">$<%= subtotal %>.00</td>
+                        <td id="actionAmount">$<%= subtotal %></td>
                     </tr>
                 <br> 
                 <br>
