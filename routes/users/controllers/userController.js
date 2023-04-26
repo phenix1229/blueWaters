@@ -143,8 +143,8 @@ module.exports = {
         .then(trans => {
             if(req.body.memberID !== '') trans.memberID = memberID;
             if(req.body.date !== '') trans.date = date;
-            if(req.body.location !== '') trans.location = location;
-            if(req.body.description !== '') trans.description = description;
+            if(req.body.location !== '') trans.location = location.toUpperCase();
+            if(req.body.description !== '') trans.description = description.toUpperCase();
             if(req.body.amount !== '') trans.amount = amount;
             trans.save().then((trans) => {
                 return res.render('users/success', {message:"Transaction updated.", item:JSON.stringify(trans).split(",")})
@@ -169,7 +169,7 @@ module.exports = {
             const newTransaction = new Transaction();
             newTransaction.memberID = member._id;
             newTransaction.date = date;
-            newTransaction.location = location;
+            newTransaction.location = location.toUpperCase();
             newTransaction.description = description.toUpperCase();
             newTransaction.amount = amount;
             newTransaction.save().then((newTransaction) => {
@@ -336,17 +336,17 @@ module.exports = {
                     const tDate = String(item.date);
                     if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
                         switch (item.location){
-                            case "bar":
-                                bFees += item.amount;
+                            case "BAR":
+                                bFees += Number(item.amount);
                                 break;
-                            case "restaurant":
-                                rFees += item.amount;
+                            case "RESTAURANT":
+                                rFees += Number(item.amount);
                                 break;
-                            case "proShop":
-                                psFees += item.amount;
+                            case "PRO SHOP":
+                                psFees += Number(item.amount);
                                 break;
-                            case "tennis/golf lessons":
-                                tglFees += item.amount;
+                            case "TENNIS/GOLF LESSONS":
+                                tglFees += Number(item.amount);
                                 break;
                         }
                     }
@@ -372,17 +372,17 @@ module.exports = {
                     const tDate = String(item.date);
                     if(tDate.slice(11,15) === year && tDate.slice(4,7) === month && tDate.slice(8,10) === day){
                         switch (item.location){
-                            case "bar":
-                                bFees += item.amount;
+                            case "BAR":
+                                bFees += Number(item.amount);
                                 break;
-                            case "restaurant":
-                                rFees += item.amount;
+                            case "RESTAURANT":
+                                rFees += Number(item.amount);
                                 break;
-                            case "proShop":
-                                psFees += item.amount;
+                            case "PRO SHOP":
+                                psFees += Number(item.amount);
                                 break;
-                            case "tennis/golf lessons":
-                                tglFees += item.amount;
+                            case "TENNIS/GOLF LESSONS":
+                                tglFees += Number(item.amount);
                                 break;
                         }
                     }
@@ -408,7 +408,7 @@ module.exports = {
             for(item of trans){
                 const tDate = String(item.date)
                 if(tDate.slice(11,15) === year && tDate.slice(4,7) === month){
-                    memTotal += item.amount;
+                    memTotal += Number(item.amount);
                 }
             }
             salesList[1].push(memTotal);
